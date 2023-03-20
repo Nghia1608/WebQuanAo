@@ -15,48 +15,22 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/template/plugins/OwlCarousel2-2.2.1/owl.carousel.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/template/plugins/OwlCarousel2-2.2.1/owl.theme.default.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/template/plugins/OwlCarousel2-2.2.1/animate.css"/>">
-<link rel="stylesheet" href="<c:url value="/template/plugins/themify-icons/themify-icons.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/template/plugins/jquery-ui-1.12.1.custom/jquery-ui.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/template/styles/single_styles.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/template/styles/single_responsive.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/template/css/cssUsers/cart.css"/>">
-<link rel="stylesheet" href="<c:url value="/template/css/cssUsers/login.css"/>">
-
-<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<link rel="stylesheet" type="text/css" href="<c:url value="/template/styles/main_styles.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/template/styles/responsive.css"/>">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
 </head>
 <body>
 
 <!-- header -->
-	<header class="header trans_300">
-		<div class="main_nav_container">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12 text-right">
-						<div class="logo_container">
-							<a href="/">NghiaTai<span>Shop</span></a>
-						</div>
-						<nav class="navbar">
-							<ul class="navbar_menu">
-								<li><a href="/">Trang chủ</a></li>
-								<li><a href="/contact">Liên hệ</a></li>
-
-							</ul>
-
-
-						</nav>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
+<%@include file = "/WEB-INF/views/layouts/user/header.jsp" %>
 <!-- header -->
 
 <decorator:body/>
 
 <!-- footer -->
-
+<%@include file = "/WEB-INF/views/layouts/user/footer.jsp" %>
 <!-- footer -->
 
 

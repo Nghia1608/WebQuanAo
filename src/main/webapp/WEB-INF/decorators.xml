@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--<decorators defaultdir="/WEB-INF/views/layouts">-->
 <decorators defaultdir="/WEB-INF/views">
-    <decorator name="user" page="layouts/user.jsp">
+    <decorator name="home" page="layouts/home.jsp">
        <pattern>/trang-chu/*</pattern>
        <pattern>/</pattern>
     </decorator>
-    
+    <decorator name="user" page="layouts/user.jsp">
+       <pattern>/user/*</pattern>
+    </decorator>
     <decorator name="admin" page="layouts/admin.jsp">
        <pattern>/quan-tri/*</pattern>
     </decorator>

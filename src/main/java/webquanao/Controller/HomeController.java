@@ -18,6 +18,15 @@ public class HomeController {
 		return "admin/dashboard";
 	}
 
+	@RequestMapping("/auth/login")
+	public String UserLogin() {		
+		return "user/login";
+	}
+	@RequestMapping("/auth/register")
+	public String UserRegister() {		
+		return "user/register";
+	}
+	
 	@RequestMapping("/")
 	public ModelAndView HomeUser() {	
 		ModelAndView mv =new ModelAndView("user/home");
