@@ -2,8 +2,7 @@
 <!--<decorators defaultdir="/WEB-INF/views/layouts">-->
 <decorators defaultdir="/WEB-INF/views">
     <decorator name="home" page="layouts/home.jsp">
-       <pattern>/trang-chu/*</pattern>
-       <pattern>/</pattern>
+       <pattern>/home/*</pattern>
     </decorator>
     <decorator name="user" page="layouts/user.jsp">
        <pattern>/user/*</pattern>

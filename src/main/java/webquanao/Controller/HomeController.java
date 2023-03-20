@@ -20,11 +20,11 @@ public class HomeController {
 
 	@RequestMapping("/auth/login")
 	public String UserLogin() {		
-		return "user/login";
+		return "auth/login";
 	}
 	@RequestMapping("/auth/register")
 	public String UserRegister() {		
-		return "user/register";
+		return "auth/register";
 	}
 	
 	@RequestMapping("/")

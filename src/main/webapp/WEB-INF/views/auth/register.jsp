@@ -16,7 +16,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/template/plugins/OwlCarousel2-2.2.1/owl.carousel.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/template/plugins/OwlCarousel2-2.2.1/owl.theme.default.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/template/plugins/OwlCarousel2-2.2.1/animate.css"/>">
-<link rel="stylesheet" href="<c:url value="/template/plugins/themify-icons/themify-icons.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/template/plugins/themify-icons/themify-icons.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/template/plugins/jquery-ui-1.12.1.custom/jquery-ui.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/template/styles/single_styles.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/template/styles/single_responsive.css"/>">
@@ -75,14 +75,15 @@
         <div class="button">
           <input type="submit" value="Đăng Ký">
         </div>
+              </form>
 		    <h5 >Đăng nhập</h5>
 
             Đã có tài khoản ? <a href="/auth/login">Đăng nhập ngay</a>
          </div>
-      </form>
+
     </div>
     </div>
-	</div>
+<!-- 	</div> -->
 	<!-- Benefit -->
 
 	<div class="benefit">
