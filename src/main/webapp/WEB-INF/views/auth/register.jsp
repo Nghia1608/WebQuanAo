@@ -38,7 +38,7 @@
     <h3 >Đăng ký tài khoản</h3>
     <label for="hoTen"><i class="fa fa-user"></i> Thông tin liên hệ</label>
     <div class="content">
-    <form method="POST" action="/auth/registerUser?_method=POST">
+    <form method="POST" action="${pageContext.request.contextPath}/auth/register">
         <div class="user-details">
           <div class="input-box">
             <span class="details">Họ và tên</span>
@@ -73,7 +73,7 @@
             <span id="show1" class="show"><i class="fa fa-eye"></i></span>
 		</div>
         <div class="button">
-          <input type="submit" value="Đăng Ký">
+          <input type="submit" type="submit" value="Register">
         </div>
               </form>
 		    <h5 >Đăng nhập</h5>

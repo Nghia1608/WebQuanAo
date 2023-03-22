@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--<decorators defaultdir="/WEB-INF/views/layouts">-->
 <decorators defaultdir="/WEB-INF/views">
-    <decorator name="home" page="layouts/home.jsp">
-       <pattern>/home/*</pattern>
+    <decorator name="admin" page="layouts/admin.jsp">
+       <pattern>/admin</pattern>
+    </decorator>
+    <decorator name="auth" page="layouts/auth.jsp">
+       <pattern>/auth/*</pattern>
     </decorator>
     <decorator name="user" page="layouts/user.jsp">
-       <pattern>/user/*</pattern>
+    	<pattern>/home/*</pattern>
+        <pattern>/*</pattern>
     </decorator>
-    <decorator name="admin" page="layouts/admin.jsp">
-       <pattern>/quan-tri/*</pattern>
-    </decorator>
+
 
 </decorators>

@@ -19,5 +19,12 @@ public class ProductsDAO {
 		String sql = "SELECT * FROM product";
 		list = jdbcTemplate.query(sql,new ProductsBLL());
 		return list;
+
 	}
+	
+    public int getTotal() {
+        String sql = "SELECT COUNT(*) FROM product";
+        int total = jdbcTemplate.queryForObject(sql, Integer.class);
+        return total;
+    }
 }

@@ -15,27 +15,93 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/template/plugins/OwlCarousel2-2.2.1/owl.carousel.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/template/plugins/OwlCarousel2-2.2.1/owl.theme.default.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/template/plugins/OwlCarousel2-2.2.1/animate.css"/>">
-<link rel="stylesheet" href="<c:url value="/template/plugins/themify-icons/themify-icons.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/template/plugins/jquery-ui-1.12.1.custom/jquery-ui.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/template/styles/single_styles.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/template/styles/single_responsive.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/template/css/cssUsers/cart.css"/>">
-<link rel="stylesheet" href="<c:url value="/template/css/cssUsers/login.css"/>">
-
-<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<link rel="stylesheet" type="text/css" href="<c:url value="/template/styles/main_styles.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/template/styles/responsive.css"/>">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
 </head>
+<!-- user nha -->
 <body>
-
 <!-- header -->
 	<header class="header trans_300">
+
+		<!-- Top Navigation -->
+
+		<div class="top_nav">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="top_nav_left">Miễn phí đơn hàng trên 300.000 VNĐ và nhiều ưu đãi</div>
+					</div>
+					<div class="col-md-6 text-right">
+						<div class="top_nav_right">
+							<ul class="top_nav_menu">
+
+								<!-- Currency / Language / My Account -->
+								<li class="account">
+									<a id="username"href="#">
+										Tài khoản {{users.userName}}
+										<i class="fa fa-angle-down"></i>
+									</a>
+									<ul class="account_selection">
+
+										{{!-- After Login --}}
+										<li id="changePassword"hidden><a><i class="fa fa-sign-in" aria-hidden="true"></i>Thông tin tài khoản</a></li>
+										<li id="purchase"hidden><a href="/users/purchase"><i class="fa fa-sign-in" aria-hidden="true"></i>Lịch sử mua hàng</a></li>
+										{{!-- Before Login --}}
+
+										<li id="login" hidden><a  href="/auth/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng nhập</a></li>
+										
+										<li id="logOut"hidden>
+											<a id="logout"href="#"><i class="fa fa-user-plus" aria-hidden="true">
+											</i>Đăng xuất</a>
+    									{{!-- <button type="submit" class="btn btn-primary">Đăng xuất</button> --}}
+										</li>
+
+										<script>
+											document.getElementById("logout").onclick = function(){
+    												sessionStorage.removeItem("username");
+
+													var logoutForm = document.forms['restore-product-form'];
+
+													logoutForm.action = '/auth/logout?_method=POST';
+													logoutForm.submit();
+											}
+										</script>
+										<script>
+											document.getElementById("login").hidden =false;
+											if(
+												sessionStorage.getItem("username")
+											){
+												document.getElementById("username").innerHTML ="Xin chào  " + 
+													sessionStorage.getItem("username");
+												document.getElementById("changePassword").hidden =false;
+												document.getElementById("purchase").hidden =false;
+												document.getElementById("logOut").hidden =false;
+												document.getElementById("login").hidden =true;
+
+											}
+
+											</script>
+											
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Main Navigation -->
+
 		<div class="main_nav_container">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12 text-right">
 						<div class="logo_container">
-							<a href="/">NghiaTai<span>Shop</span></a>
+							<a href="/">Shop<span>3ea</span></a>
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
@@ -43,20 +109,32 @@
 								<li><a href="/contact">Liên hệ</a></li>
 
 							</ul>
+							<ul class="navbar_user">
 
+								<li class="checkout">
+									<a href="/users/cart">
+										<i id="checkout_items" class="fa fa-shopping-cart" aria-hidden="true"></i>
+										<span id="checkout_items" class="checkout_items"></span>
+									</a>
+								</li>
+							</ul>
 
 						</nav>
 					</div>
 				</div>
 			</div>
 		</div>
+
 	</header>
+<!-- header -->
+<!-- header -->
+<%@include file = "/WEB-INF/views/layouts/user/header.jsp" %>
 <!-- header -->
 
 <decorator:body/>
 
 <!-- footer -->
-
+<%@include file = "/WEB-INF/views/layouts/user/footer.jsp" %>
 <!-- footer -->
 
 

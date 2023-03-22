@@ -3,9 +3,30 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
     <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<style>
+.pagination {
+  display: inline-block;
+  text-align: center;
+}
+.pagination a {
+text-align: center;
+  color: black;
 
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 10px 10px;
+}
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+.pagination a:hover:not(.active) {background-color: #ddd;}
+</style>
 <div class="super_container">
-	<!-- Slider -->
+	<!-- Slider home.jsp -->
 
 	<div class="main_slider" style="background-image:url(<c:url value="/template/images/banner.jpg"/>)">
 		<div class="container fill_height">
@@ -122,11 +143,20 @@
 								</div>
 						</c:forEach>
 
-						
+					
 					</div>
 				</div>
+										<div class="pagination">
+											  <a href="#">&laquo;</a>
+											  <a href="#">1</a>
+											  <a href="#" class="active">2</a>
+											  <a href="#">3</a>
+											  <a href="#">4</a>
+											  <a href="#">5</a>
+											  <a href="#">6</a>
+											  <a href="#">&raquo;</a>
+											</div>
 			</div>
-
 		</div>
 	</div>
 

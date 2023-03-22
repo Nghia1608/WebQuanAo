@@ -36,7 +36,7 @@
 	<div class="container single_product_container">
     <div class="mt-4">
     <h3 >Đăng nhập</h3>
-         <form method="POST" action ="/auth/confirmLogin";>
+         <form method="post" action ="${pageContext.request.contextPath}/auth/login";>
 
          <div class="input-box">
             <span class="details">Username</span>
@@ -48,7 +48,7 @@
             <span class="show"><i class="fa fa-eye"></i></span>
           </div>
             <div class="button">
-             <button id="login" onclick="login()"class="btn btn-primary">Đăng nhập</button>
+             <button id="login" type="submit" value="Login"btn btn-primary">Đăng nhập</button>
             </div>
 
          </form>

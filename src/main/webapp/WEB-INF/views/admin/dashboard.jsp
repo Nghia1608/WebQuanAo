@@ -1,336 +1,409 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
     <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<body>
-<div class="super_container">
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
 
-	<!-- Header -->
+        <div class="sidebar-brand-text mx-3">NghiaTaiShop</div>
 
-	<header class="header trans_300">
+      </a>
+      <hr class="sidebar-divider my-0">
+      <li class="nav-item active">
+        <a class="nav-link">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Bảng điều khiển</span></a>
+      </li>
+      <hr class="sidebar-divider">
+      <div class="sidebar-heading">
+        Chức năng
+      </div>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
+          aria-expanded="true" aria-controls="collapseBootstrap">
+          <i class="far fa-fw fa-window-maximize"></i>
+          <span>QL Sản phẩm</span>
+        </a>
+        <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="products/storedProducts">Danh sách sản phẩm</a>
+            <a class="collapse-item" href="products/create">Thêm mới</a>
+            <a class="collapse-item" href="products/trashProducts">Sản phẩm đã xóa</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true"
+          aria-controls="collapseForm">
+          <i class="fab fa-fw fa-wpforms"></i>
+          <span>QL Hóa đơn</span>
+        </a>
+        <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="users/purchase">Danh sách hóa đơn</a>
+            <a class="collapse-item" href="users/canceledPurchase">Hóa đơn đã hủy</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
+          aria-controls="collapseTable">
+          <i class="fas fa-fw fa-table"></i>
+          <span>QL Tài khoản</span>
+        </a>
+        <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="users/storedUsers">Danh sách tài khoản</a>
+          </div>
+        </div>
+      </li>
+      {{!-- <li class="nav-item">
+        <a class="nav-link" href="ui-colors.html">
+          <i class="fas fa-fw fa-palette"></i>
+          <span>UI Colors</span>
+        </a>
+      </li> --}}
+      <hr class="sidebar-divider">
+      <div class="sidebar-heading">
+        
+        {{!-- Examples
+      </div>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true"
+          aria-controls="collapsePage">
+          <i class="fas fa-fw fa-columns"></i>
+          <span>Pages</span>
+        </a>
+        <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Example Pages</h6>
+            <a class="collapse-item" href="login.html">Login</a>
+            <a class="collapse-item" href="register.html">Register</a>
+            <a class="collapse-item" href="404.html">404 Page</a>
+            <a class="collapse-item" href="blank.html">Blank Page</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="charts.html">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Charts</span>
+        </a>
+      </li>
+      <hr class="sidebar-divider">
+      <div class="version" id="version-ruangadmin"></div> --}}
+    </ul>
+    <!-- Sidebar -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <!-- TopBar -->
+        <!-- Topbar -->
 
-		<!-- Top Navigation -->
+        <!-- Container Fluid-->
+        <div class="container-fluid" id="container-wrapper">
 
-		<div class="top_nav">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="top_nav_left">Miễn phí đơn hàng trên 300.000 VNĐ và nhiều ưu đãi</div>
-					</div>
-					<div class="col-md-6 text-right">
-						<div class="top_nav_right">
-							<ul class="top_nav_menu">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Bảng điều khiển</h1>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a id="logout"href="#">Đăng xuất</a></li>
 
-								<!-- Currency / Language / My Account -->
-								<li class="account">
-									<a id="username"href="#">
-										Tài khoản 
-										<i class="fa fa-angle-down"></i>
+            </ol>
+          </div>
+                      <script>
+											    document.getElementById("logout").onclick = function(){
+                          sessionStorage.removeItem("username");
+
+													var formDashboard = document.forms['formDashboard'];
+
+													formDashboard.action = '/auth/logout?_method=POST';
+													formDashboard.submit();
+											}
+										</script>
+          <div class="row mb-3">
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Thu nhập (Tháng)</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" 
+                      id="thuNhapThang">
+                      {{#each doanhThuTheo2ThangGanNhat}}{{#if @first}}{{this.tongTien}}{{/if}}{{/each}}
+                      </div>
+                      <div class="mt-2 mb-0 text-muted text-xs">
+                        <span class="text-success mr-2"><i  id="percent"></i> </span>
+                        <br>
+                        <span id="hienThiPhanTram">Thu nhập tăng so với tháng trước</span>
+                        <span id="thangTruoc"></span>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-calendar fa-2x text-primary"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <input type="text" class="form-control" 
+                  value="{{#each doanhThuTheo2ThangGanNhat}}{{#if @last}}{{this.tongTien}}{{/if}}{{/each}}" 
+                  id="tienThangTruoc" hidden>
+                <script>
+                  var tienThangTruoc = document.getElementById("tienThangTruoc").value
+                  var tienThangNay =  document.getElementById("thuNhapThang").innerHTML
+                  var percent = Math.round(tienThangNay/tienThangTruoc*100)
+
+                  document.getElementById("percent").innerHTML ="+" +(percent-100) + " %";
+                  document.getElementById("thangTruoc").innerHTML = Number(tienThangTruoc).toLocaleString() + " VND";
+
+                  if(percent<100){
+                  document.getElementById("hienThiPhanTram").innerHTML = "Thu nhập giảm so với tháng trước";
+                  document.getElementById("percent").innerHTML ="-"+ (percent-100) + " %";
+                  }
+                  document.getElementById("thuNhapThang").innerHTML = Number(document.getElementById("thuNhapThang").innerHTML).toLocaleString() + "   VND"
+
+                </script>
+            </div>
+            <!-- Earnings (Annual) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Tổng đơn hàng (tháng)</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" 
+                        id="tongDonHang">
+                      {{#each soHoaDon2ThangGanNhat}}{{#if @first}}{{this.maHoaDon.length}}{{/if}}{{/each}}
+                        
+                      </div>
+                      <div class="mt-2 mb-0 text-muted text-xs">
+                        <span class="text-success mr-2"><i  id="percent1"></i> </span>
+                        <br>
+                        <span id="hienThiPhanTram1">Số hóa đơn tăng so với tháng trước</span>
+                        <span id="thangTruoc1"></span>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-shopping-cart fa-2x text-success"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                  <input type="text" class="form-control" 
+                  value="{{#each soHoaDon2ThangGanNhat}}{{#if @last}}{{this.maHoaDon.length}}{{/if}}{{/each}}" 
+                  id="soHoaDonThangTruoc1" hidden>
+                <script>
+                  var tienThangTruoc1 = document.getElementById("soHoaDonThangTruoc1").value
+                  var tienThangNay1 =  document.getElementById("tongDonHang").innerHTML
+                  var percent1 = Math.round(tienThangNay1/tienThangTruoc1*100)
+
+                  document.getElementById("percent1").innerHTML ="+" +(percent1-100) + " %";
+                  document.getElementById("thangTruoc1").innerHTML = Number(tienThangTruoc1).toLocaleString() + " đơn hàng";
+
+                  if(percent1<100){
+                  document.getElementById("hienThiPhanTram1").innerHTML = "Giảm so với tháng trước";
+                  document.getElementById("percent1").innerHTML ="-"+ (percent1-100) + " %";
+                  }
+                  document.getElementById("tongDonHang").innerHTML = Number(document.getElementById("tongDonHang").innerHTML).toLocaleString() + "   đơn hàng"
+
+                </script>
+            </div>
+            <!-- New User Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Khách đăng kí mới</div>
+                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"id="newUser">366</div>
+                      <div class="mt-2 mb-0 text-muted text-xs">
+                        <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 20.4%</span>
+                        <span>So với tháng trước</span>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-users fa-2x text-info"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Tổng sản phẩm</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                      <div class="mt-2 mb-0 text-muted text-xs">
+                        {{!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
+                        <span>Since yesterday</span> --}}
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fa fa-cubes fa-2x text-warning"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Area Chart -->
+            <div class="col-xl-12 col-lg-7"> 
+                  <input type="text" class="form-control" 
+                  value="{{doanhThuCacThangTrongNam}}" 
+                  id="tienTheoCacThang" hidden>
+              <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Doanh thu theo tháng</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                      aria-labelledby="dropdownMenuLink">
+                      <div class="dropdown-header">Dropdown Header:</div>
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="chart-area">
+                    <canvas id="myAreaChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Pie Chart -->
+            <div class="col-xl-4 col-lg-5">
+              <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Sản phẩm bán chạy</h6>
+                  <div class="dropdown no-arrow">
+
+									<div class="dropdown">
+									<a class="dropdown-toggle btn btn-primary btn-sm" href="#" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+										Tháng<i class="fas fa-chevron-down"></i>
 									</a>
-									<ul class="account_selection">
+									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    
 
-										<li id="changePassword"hidden><a href="/users/{{idUser}}/edit"><i class="fa fa-sign-in" aria-hidden="true"></i>Thông tin tài khoản</a></li>
-										<li id="purchase"hidden><a href="/users/purchase"><i class="fa fa-sign-in" aria-hidden="true"></i>Lịch sử mua hàng</a></li>
-
-										<li id="login" hidden><a  href="/auth/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng nhập</a></li>
-										<li id="login" hidden><a  href="/auth/register"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng ký</a></li>
-										
-										<form name="logoutForm" method="POST">
-										<li hidden id="logOut">
-											<a id="logout"href="#"><i class="fa fa-user-plus" aria-hidden="true">
-											</i>Đăng xuất</a>
-										</li>
-											
+										<li><a class="dropdown-item" href="/products/storedProducts">Hôm nay</a></li>
+										<li><a class="dropdown-item" href="/users/storedUsers">Quý</a></li>
+										<li><a class="dropdown-item" href="#">Năm</a></li>
+										<li><a class="dropdown-item" href="#">Tùy chọn <input type="date" id="Test_DatetimeLocal" name="thoiGianDatHang"> Đến <input type="date1" id="Test_DatetimeLocal1"></a></li>
 									</ul>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Main Navigation -->
-
-		<div class="main_nav_container">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12 text-right">
-						<div class="logo_container">
-							<a href="/">Shop đồ <span>3ae</span></a>
-						</div>
-						<nav class="navbar">
-							<ul class="navbar_menu">
-								<li><a href="/">Trang chủ</a></li>
-								<li><a href="/contact">Liên hệ</a></li>
-							</ul>
-							<ul class="navbar_user">
-
-								<li class="checkout">
-									<a href="/users/cart">
-										<i id="checkout_items" class="fa fa-shopping-cart" aria-hidden="true"></i>
-										<span id="checkout_items" class="checkout_items"></span>
-									</a>
-								</li>
-							</ul>
-
-						</nav>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</header>
-
-	
-
-	<!-- Slider -->
-
-	<div class="main_slider" style="background-image:url(/images/slider_1.jpg)">
-		<div class="container fill_height">
-			<div class="row align-items-center fill_height">
-				<div class="col">
-					<div class="main_slider_content">
-						<h6>Shop đồ 3ae</h6>
-						<h1>Old but gold</h1>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Banner -->
-
-	<div class="banner">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="banner_item align-items-center" style="background-image:url(/images/banner_3.jpg)">
-							<a class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".kho" >Nam</a>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="banner_item align-items-center" style="background-image:url(/images/blog_2.jpg)">
-							<a class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".comChay" >Nữ</a>
-
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="banner_item align-items-center" style="background-image:url(/images/blog_3.jpg)">
-							<a class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".khac" >Khác</a>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- New Arrivals -->
-
-	<div class="new_arrivals">
-		<div class="container">
-			<div class="row">
-				<div class="col text-center">
-					<div class="section_title new_arrivals_title">
-						<h2>Sản Phẩm Mới</h2>
-					</div>
-				</div>
-			</div>
-			<div class="row align-items-center">
-				<div class="col text-center">
-					<div class="new_arrivals_sorting">
-						<ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
-							<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">Tất cả</li>
-							<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".kho">Nam</li>
-							<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".comChay">Nữ</li>
-							<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".khac">Khác</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-
-				<div class="col">
-					<div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
-
-						<!-- Product 1 -->
-						<div class="product-item {{this.maLoai}}">
-							<div class="product discount product_filter">
-								<div class="product_image">
-									<a href="/products/{{this._id}}">
-										<img href="/products/{{this._id}}" src="{{this.image}}" alt="">
-
-									</a>
-								</div>
-								<div class="favorite favorite_left"></div>
-								<div class="product_info">
-									<h6 class="product_name"><a href="/products/{{this._id}}"></a></h6>
-									<div id ="moTa" class="product_price"></div>
-								</div>
-							</div>
-
-                    <input type="number" class="form-control" value="1" min="1" max="20"id="soLuong" name="soLuong" hidden>
-            		<input type="text" class="form-control" value="{{this._id}}" id="idSP" name="idSP" hidden>
-
-							<div class="red_button add_to_cart_button"><a href="/products/{{this._id}}">Xem chi tiết</a></div>
-
-						</div>
-						
-					</div>
-				</div>
-			</div>
-
-		</div>
-	</div>
-
-
-
-	<!-- Best Sellers -->
-
-	<div class="best_sellers">
-		<div class="container">
-			<div class="row">
-				<div class="col text-center">
-					<div class="section_title new_arrivals_title">
-						<h2>Bán chạy</h2>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col">
-					<div class="product_slider_container">
-						<div class="owl-carousel owl-theme product_slider">
-
-							<!-- Slide 1 -->
-							<div class="owl-item product_slider_item">
-								<div class="product-item">
-									<div class="product discount">
-										<div class="product_image" >
-											<a href="/products/{{this._id}}" >
-												<img src="{{this.image}}" alt="">
-											</a>
-										</div>
-										<div class="favorite favorite_left"></div>
-										<div class="product_info">
-											<h6 class="product_name"><a href="/products/{{this._id}}"></a></h6>
-											<div id ="giaTien{{this.giaTien}}" class="product_price"></div>
-
-										</div>
 									</div>
-								</div>
-							</div>
+                  </div>
+                </div>
+
+                <div class="card-body">
+                      {{#each soLuongSanPham}}
+
+                  <div class="mb-3">
+                    <div class="small text-gray-500">{{this._id}}
+                      <div class="small float-right"><b>{{this.tongSoLuong}}</b></div>
+                    </div>
+
+                  </div>
+                    {{/each}}
+
+                </div>
+                <div class="card-footer text-center">
+                  <a class="m-0 small text-primary card-link" href="products/storedProducts">Xem thêm <i
+                      class="fas fa-chevron-right"></i></a>
+                </div>
+              </div>
+
+              <script>
+                
+                    document.getElementById("Test_DatetimeLocal").onchange = function(){
 
 
-						</div>
+                    var formDashboard = document.forms['formDashboard'];
+                    formDashboard.action = '/admin1?_method=GET';
+                    formDashboard.submit();
+                }
+              </script>
+            </div>
+            <!-- Invoice Example -->
+            <div class="col-xl-8 col-lg-7 mb-4">
+              <div class="card">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Hóa đơn</h6>
+                  <a class="m-0 float-right btn btn-danger btn-sm" href="users/purchase">Xem thêm... <i
+                      class="fas fa-chevron-right"></i></a>
+                </div>
+                <div class="table-responsive">
+                  <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Mã hóa đơn</th>
+                        <th>Tổng tiền</th>
+                        <th>Trạng thái</th>
+                        <th>Chi tiết</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {{#each danhSachHoaDonGanNhat}}
+                      <tr>
+                        <td>{{this._id}}</td>
+                        <td>            <h6 class="giaTienBanRa"id="giaTienBanRa{{this._id}}" name="giaTienBanRa{{this._id}}" >{{this.tongTien}}</h6></td>
+                        <td>{{this.tinhTrang}}</td>
+                        <td><a href="/users/{{this._id}}/purchaseDetail" class="btn btn-sm btn-primary">Chi tiết</a></td>
+                      </tr>
+                    <script>
+        					    var giaTienBanRaHienThi{{this._id}} = "giaTienBanRa"+{{this._id}}
+                      document.getElementById(giaTienBanRaHienThi{{this._id}}).innerHTML = ({{this.tongTien}}).toLocaleString() + "  VND"; 
 
-						<!-- Slider Navigation -->
+                    </script>
+                    {{/each}}
 
-						<div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
-							<i class="fa fa-chevron-left" aria-hidden="true"></i>
-						</div>
-						<div class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
-							<i class="fa fa-chevron-right" aria-hidden="true"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                    </tbody>
+                  </table>
 
-	<!-- Benefit -->
+                </div>
+                <div class="card-footer"></div>
+              </div>
+            </div>
 
-	<div class="benefit">
-		<div class="container">
-			<div class="row benefit_row">
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Miễn Phí Giao Hàng</h6>
-							<p>Cho đơn hàng 300k trên</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Thanh toán</h6>
-							<p>Thanh toán khi nhận hàng hoặc thanh toán online</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Hoàn tiền</h6>
-							<p>Nếu sản phẩm bị lỗi do shop hoặc do vận chuyển</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Từ T2 - T7</h6>
-							<p>8:00 - 21:00 </p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+          </div>
+<form id="formDashboard"name="formDashboard" method="POST">
 
-	
+        </div>
+        <!---Container Fluid-->
+      </div>
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; <script> document.write(new Date().getFullYear()); </script>
+             {{!-- - developed by --}}
+              <b><a href="https://indrijunanda.gitlab.io/" target="_blank">NghiaTaiShop</a></b>
+            </span>
+          </div>
+        </div>
 
-	
+      </footer>
+      <!-- Footer -->
+    </div>
+  </div>
 
-	<!-- Footer -->
+  <!-- Scroll to top -->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
 
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
-						<ul class="footer_nav">
-							<li><a href="#">Blog</a></li>
-							<li><a href="#">FAQs</a></li>
-							<li><a href="contact.html">Contact us</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
-						<ul>
-							<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-							<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-							<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-							<li><a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a></li>
-							<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="footer_nav_container">
-						<div class="cr">©2022 Copyright Shop đồ 3ae </div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-
-</div>
-
-<script src="<c:url value='/template/js/jquery-3.2.1.min.js'/>"></script>
-<script src="<c:url value='/template/styles/bootstrap4/popper.js'/>"></script>
-<script src="<c:url value='/template/styles/bootstrap4/bootstrap.min.js'/>"></script>
-<script src="<c:url value='/template/plugins/Isotope/isotope.pkgd.min.js'/>"></script>
-<script src="<c:url value='/template/plugins/OwlCarousel2-2.2.1/owl.carousel.js'/>"></script>
-<script src="<c:url value='/template/plugins/easing/easing.js'/>"></script>
-<script src="<c:url value='/template/js/custom.js'/>"></script>
-</body>
+  <script  src="<c:url value='/template/plugins/jquery/jquery.min.js'/>"></script>
+  <script  src="<c:url value='/template/plugins/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
+  <script  src="<c:url value='/template/plugins/jquery-easing/jquery.easing.min.js'/>"></script>
+  <script  src="<c:url value='/template/js/ruang-admin.min.js'/>"></script>
+  <script  src="<c:url value='/template/plugins/chart.js/Chart.min.js'/>"></script>
+  <script  src="<c:url value='/template/js/demo/chart-area-demo.js'/>"></script>  
