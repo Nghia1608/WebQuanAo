@@ -7,6 +7,9 @@
     <decorator name="auth" page="layouts/auth.jsp">
        <pattern>/auth/*</pattern>
     </decorator>
+    <decorator name="product" page="layouts/product.jsp">
+       <pattern>/product/*</pattern>
+    </decorator>
     <decorator name="user" page="layouts/user.jsp">
     	<pattern>/home/*</pattern>
         <pattern>/*</pattern>

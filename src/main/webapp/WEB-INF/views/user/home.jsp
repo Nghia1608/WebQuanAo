@@ -123,7 +123,7 @@ text-align: center;
 								<div class="product-item ${item.maLoai }">
 									<div class="product discount product_filter">
 										<div class="product_image">
-											<a href="/products/{{this._id}}">
+											<a href="<c:url value="/product/${item.productID }"/>">
 												<img href="/products/{{this._id}}" src="${item.image }" alt="">
 		
 											</a>

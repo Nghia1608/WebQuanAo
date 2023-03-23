@@ -34,6 +34,22 @@ public class UsersDAO implements IUsersService{
         String sql = "INSERT INTO users (username,password,email,hoTen,sdt,quyen,diaChi,trangThai) VALUES(?,?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, user.getUsername(),user.getPassword(),user.getEmail(),user.getHoTen(), user.getSdt(),"Khach",user.getDiaChi(),"Đang hoạt động");
     }
+    @Override
+    public List<UsersDTO> findAll() {
+        String sql = "SELECT * FROM users";
+        List<UsersDTO> users = jdbcTemplate.query(sql, new UsersBLL());
+        return users;
+      }
+    @Override
+    public void update(UsersDTO user) {
+        String sql = "UPDATE users SET username = ?, password = ?, email = ?,hoTen = ?, sdt = ?, quyen = ?,diaChi = ?, trangThai = ? WHERE username = ?";
+        jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getEmail(), user.getHoTen(),user.getSdt(),"Khach",user.getDiaChi(),user.getTrangThai());
+      }
+    @Override
+    public void delete(String username) {
+        String sql = "DELETE FROM users WHERE username = ?";
+        jdbcTemplate.update(sql, username);
+      }
 
 
 }

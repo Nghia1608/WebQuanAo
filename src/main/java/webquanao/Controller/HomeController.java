@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,7 +57,7 @@ public class HomeController {
             return "auth/login";
         }
     }
-	
+
 	@RequestMapping("/auth/register")
 	public String UserRegister() {		
 		return "auth/register";
@@ -85,6 +86,15 @@ public class HomeController {
 	@RequestMapping("/contact")
 	public String Contact() {		
 		return "user/contact";
+	}
+	//Product
+	@RequestMapping(value = {"/product/{productID}"})
+	public ModelAndView ProductDetail(@PathVariable String productID) {	
+		
+		ModelAndView mv =new ModelAndView("product/productDetail");
+		mv.addObject("product",productsDAO.findByID(productID));
+		mv.addObject("productDetail",productsDAO.GetDataDetailSlide(productID));
+		return mv;		
 	}
 
 }

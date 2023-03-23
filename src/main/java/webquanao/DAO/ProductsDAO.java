@@ -8,10 +8,16 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import webquanao.BLL.ProductsBLL;
+import webquanao.BLL.ProductsDetailsBLL;
+import webquanao.BLL.UsersBLL;
 import webquanao.DTO.ProductsDTO;
+import webquanao.DTO.ProductsDetailsDTO;
+import webquanao.DTO.UsersDTO;
+import webquanao.Service.IProductService;
+import webquanao.Service.IUsersService;
 
 @Repository
-public class ProductsDAO {
+public class ProductsDAO implements IProductService{
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	public List<ProductsDTO> GetDataSlide(){
@@ -19,12 +25,28 @@ public class ProductsDAO {
 		String sql = "SELECT * FROM product";
 		list = jdbcTemplate.query(sql,new ProductsBLL());
 		return list;
-
 	}
-	
-    public int getTotal() {
-        String sql = "SELECT COUNT(*) FROM product";
-        int total = jdbcTemplate.queryForObject(sql, Integer.class);
-        return total;
-    }
+    @Override
+	public List<ProductsDTO> findByID(String productID){
+		String sql = "SELECT * FROM product WHERE productID = ?";
+        List<ProductsDTO> products =  jdbcTemplate.query(sql, new Object[]{productID}, new ProductsBLL());
+		return products;
+	}
+//    @Override
+//    public ProductsDTO findByID(String productID) {
+//        String sql = "SELECT * FROM product WHERE productID = ?";
+//        List<ProductsDTO> products =  jdbcTemplate.query(sql, new Object[]{productID}, new ProductsBLL());
+//        if(products.isEmpty()) {
+//            return null;
+//          } else {
+//            return products.get(0);
+//          }
+//    }
+    @Override
+	public List<ProductsDetailsDTO> GetDataDetailSlide(String productID){
+		String sql = "SELECT * FROM productdetails WHERE productID = ?";
+        List<ProductsDetailsDTO> products =  jdbcTemplate.query(sql, new Object[]{productID}, new ProductsDetailsBLL());
+		return products;
+	}
+
 }
