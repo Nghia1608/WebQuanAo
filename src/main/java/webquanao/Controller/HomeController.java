@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import webquanao.DAO.ProductsDAO;
+import webquanao.DAO.ProductsDetailsDAO;
 import webquanao.DAO.UsersDAO;
 import webquanao.DTO.ProductsDTO;
 import webquanao.DTO.UsersDTO;
@@ -27,7 +28,9 @@ import webquanao.DTO.UsersDTO;
 public class HomeController {
 	//Admin
 	@Autowired
-	ProductsDAO productsDAO;	
+	ProductsDAO productsDAO;
+	@Autowired
+	ProductsDetailsDAO productsDetailsDAO;
     private UsersDAO userDao;
 
     @Autowired
@@ -71,30 +74,88 @@ public class HomeController {
             System.out.println("Trung username");
             return "redirect:/auth/register";
         } else {
-            userDao.register(user);
+            userDao.create(user);
         	System.out.println("Thanh cong");
             return "auth/login";
         }
     }
 	
-	@RequestMapping("/")
-	public ModelAndView HomeUser() {	
-		ModelAndView mv =new ModelAndView("user/home");
-		mv.addObject("product",productsDAO.GetDataSlide());
-		return mv;		
-	}
+
 	@RequestMapping("/contact")
 	public String Contact() {		
 		return "user/contact";
 	}
 	//Product
+	//Show san pham
 	@RequestMapping(value = {"/product/{productID}"})
-	public ModelAndView ProductDetail(@PathVariable String productID) {	
+	public ModelAndView ShowDetailProduct(@PathVariable String productID) {	
 		
-		ModelAndView mv =new ModelAndView("product/productDetail");
-		mv.addObject("product",productsDAO.findByID(productID));
-		mv.addObject("productDetail",productsDAO.GetDataDetailSlide(productID));
+		ModelAndView mv =new ModelAndView("product/show");
+		mv.addObject("product",productsDAO.findProductByID(productID));
+		mv.addObject("productDetail",productsDetailsDAO.getProductsDetails(productID));
 		return mv;		
 	}
-
+	//Danh sach san pham
+	@RequestMapping("/product/storedProducts")
+	public ModelAndView storedProducts() {		
+		ModelAndView mv =new ModelAndView("product/storedProducts");
+		mv.addObject("product",productsDAO.getProducts());
+		return mv;	
+	}
+	//Them moi san pham
+	@RequestMapping("/product/create")
+	public String Create() {		
+		return "/product/create";
+	}
+    @PostMapping("/product/create")
+    public String Create(@ModelAttribute("product") ProductsDTO product,
+    		@RequestParam String productID)
+    		 {
+        List<ProductsDTO> productExist = productsDAO.findProductByID(productID);
+        if (productExist.size()!=0) {
+            System.out.println("Trung ma san pham");
+            return "redirect:/product/create";
+        } else {
+        	productsDAO.create(product);
+        	System.out.println("Thanh cong");
+            return "redirect:/product/storedProducts";
+        }
+    }
+    //Sua san pham
+    
+    
+    //Product-Detail
+	//Chi tiet san pham theo san pham
+	@RequestMapping(value = {"/product/{productID}/detail"})
+	public ModelAndView ProductDetailList(@PathVariable String productID) {	
+		
+		ModelAndView mv =new ModelAndView("product/detail");
+		mv.addObject("product",productsDAO.findProductByID(productID));
+		mv.addObject("productDetail",productsDetailsDAO.getProductsDetails(productID));
+		return mv;		
+	}
+	//Them chi tiet san pham
+	@RequestMapping("/product/createDetail")
+	public String CreateDetail() {		
+		return "/product/createDetail";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping("/")
+	public ModelAndView HomeUser() {	
+		ModelAndView mv =new ModelAndView("user/home");
+		mv.addObject("product",productsDAO.getProducts());
+		return mv;		
+	}
 }

@@ -3,28 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
     <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<style>
-.pagination {
-  display: inline-block;
-  text-align: center;
-}
-.pagination a {
-text-align: center;
-  color: black;
 
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color .3s;
-  border: 1px solid #ddd;
-  margin: 10px 10px;
-}
-.pagination a.active {
-  background-color: #4CAF50;
-  color: white;
-  border: 1px solid #4CAF50;
-}
-.pagination a:hover:not(.active) {background-color: #ddd;}
-</style>
 <div class="super_container">
 	<!-- Slider home.jsp -->
 
@@ -124,13 +103,13 @@ text-align: center;
 									<div class="product discount product_filter">
 										<div class="product_image">
 											<a href="<c:url value="/product/${item.productID }"/>">
-												<img href="/products/{{this._id}}" src="${item.image }" alt="">
+												<img href="<c:url value="/product/${item.productID }"/>" src="${item.image }" alt="">
 		
 											</a>
 										</div>
 										<div class="favorite favorite_left"></div>
 										<div class="product_info">
-											<h6 class="product_name"><a href="/products/{{this._id}}">${item.tenSanPham}</a></h6>
+											<h6 class="product_name"><a href="<c:url value="/product/${item.productID }"/>">${item.tenSanPham}</a></h6>
 											<div id ="moTa" class="product_price">${item.tinhTrang }</div>
 										</div>
 									</div>
@@ -138,7 +117,7 @@ text-align: center;
 		                    <input type="number" class="form-control" value="1" min="1" max="20"id="soLuong" name="soLuong" hidden>
 		            		<input type="text" class="form-control" value="{{this._id}}" id="idSP" name="idSP" hidden>
 		
-									<div class="red_button add_to_cart_button"><a href="/products/{{this._id}}">Xem chi tiết</a></div>
+									<div class="red_button add_to_cart_button"><a href="<c:url value="/product/${item.productID }"/>">Xem chi tiết</a></div>
 		
 								</div>
 						</c:forEach>
@@ -146,16 +125,6 @@ text-align: center;
 					
 					</div>
 				</div>
-										<div class="pagination">
-											  <a href="#">&laquo;</a>
-											  <a href="#">1</a>
-											  <a href="#" class="active">2</a>
-											  <a href="#">3</a>
-											  <a href="#">4</a>
-											  <a href="#">5</a>
-											  <a href="#">6</a>
-											  <a href="#">&raquo;</a>
-											</div>
 			</div>
 		</div>
 	</div>
@@ -184,13 +153,13 @@ text-align: center;
 								<div class="product-item ${item.maLoai }">
 									<div class="product discount">
 										<div class="product_image" >
-											<a href="/products/{{this._id}}" >
+											<a href="<c:url value="/product/${item.productID }"/>" >
 												<img src="${item.image}" alt="">
 											</a>
 										</div>
 										<div class="favorite favorite_left"></div>
 										<div class="product_info">
-											<h6 class="product_name"><a href="/products/{{this._id}}">${item.tenSanPham}</a></h6>
+											<h6 class="product_name"><a href="<c:url value="/product/${item.productID }"/>">${item.tenSanPham}</a></h6>
 											<div id ="giaTien{{this.giaTien}}" class="product_price"></div>
 
 										</div>

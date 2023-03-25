@@ -45,18 +45,14 @@
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
-
-										{{!-- After Login --}}
 										<li id="changePassword"hidden><a><i class="fa fa-sign-in" aria-hidden="true"></i>Thông tin tài khoản</a></li>
 										<li id="purchase"hidden><a href="/users/purchase"><i class="fa fa-sign-in" aria-hidden="true"></i>Lịch sử mua hàng</a></li>
-										{{!-- Before Login --}}
 
 										<li id="login" hidden><a  href="/auth/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng nhập</a></li>
 										
 										<li id="logOut"hidden>
 											<a id="logout"href="#"><i class="fa fa-user-plus" aria-hidden="true">
 											</i>Đăng xuất</a>
-    									{{!-- <button type="submit" class="btn btn-primary">Đăng xuất</button> --}}
 										</li>
 
 										<script>
@@ -65,7 +61,7 @@
 
 													var logoutForm = document.forms['restore-product-form'];
 
-													logoutForm.action = '/auth/logout?_method=POST';
+													logoutForm.action = '/WebQuanAo/auth/logout?_method=POST';
 													logoutForm.submit();
 											}
 										</script>
@@ -101,7 +97,7 @@
 				<div class="row">
 					<div class="col-lg-12 text-right">
 						<div class="logo_container">
-							<a href="/">Shop<span>3ea</span></a>
+							<a href="/WebQuanAo">Shop<span>3ea</span></a>
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">

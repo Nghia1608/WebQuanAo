@@ -73,12 +73,12 @@
             <span id="show1" class="show"><i class="fa fa-eye"></i></span>
 		</div>
         <div class="button">
-          <input type="submit" type="submit" value="Register">
+          <input type="submit" type="submit" value="Đăng ký">
         </div>
               </form>
 		    <h5 >Đăng nhập</h5>
 
-            Đã có tài khoản ? <a href="/auth/login">Đăng nhập ngay</a>
+            Đã có tài khoản ? <a href="/WebQuanAo/auth/login">Đăng nhập ngay</a>
          </div>
 
     </div>

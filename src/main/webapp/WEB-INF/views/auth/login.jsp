@@ -55,7 +55,7 @@
          <div class="signup">
     <h5 >Đăng nhập</h5>
 
-            Chưa có tài khoản ? <a href="/auth/register">Đăng ký ngay</a>
+            Chưa có tài khoản ? <a href="/WebQuanAo/auth/register">Đăng ký ngay</a>
          </div>
          <script>
          document.getElementById("login").onclick = function(){

@@ -19,7 +19,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/template/plugins/jquery-ui-1.12.1.custom/jquery-ui.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/template/styles/single_styles.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/template/styles/single_responsive.css"/>">
-<%-- <link rel="stylesheet" type="text/css" href="<c:url value="/template/css/cssUsers/cart.css"/>"> --%>
+<link rel="stylesheet" type="text/css" href="<c:url value="/template/css/cssUsers/cart.css"/>">
 <link rel="stylesheet" href="<c:url value="/template/css/cssUsers/showProduct.css"/>">
 
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
@@ -50,17 +50,15 @@
 									</a>
 									<ul class="account_selection">
 
-										{{!-- After Login --}}
+
 										<li id="changePassword"hidden><a><i class="fa fa-sign-in" aria-hidden="true"></i>Thông tin tài khoản</a></li>
-										<li id="purchase"hidden><a href="/users/purchase"><i class="fa fa-sign-in" aria-hidden="true"></i>Lịch sử mua hàng</a></li>
-										{{!-- Before Login --}}
+										<li id="purchase"hidden><a href="/WebQuanAo/users/purchase"><i class="fa fa-sign-in" aria-hidden="true"></i>Lịch sử mua hàng</a></li>
 
 										<li id="login" hidden><a  href="/auth/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng nhập</a></li>
 										
 										<li id="logOut"hidden>
 											<a id="logout"href="#"><i class="fa fa-user-plus" aria-hidden="true">
 											</i>Đăng xuất</a>
-    									{{!-- <button type="submit" class="btn btn-primary">Đăng xuất</button> --}}
 										</li>
 
 										<script>
@@ -105,18 +103,18 @@
 				<div class="row">
 					<div class="col-lg-12 text-right">
 						<div class="logo_container">
-							<a href="/">Shop<span>3ea</span></a>
+							<a href="/WebQuanAo">Shop<span>3ea</span></a>
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
-								<li><a href="/">Trang chủ</a></li>
-								<li><a href="/contact">Liên hệ</a></li>
+								<li><a href="/WebQuanAo">Trang chủ</a></li>
+								<li><a href="/WebQuanAo/contact">Liên hệ</a></li>
 
 							</ul>
 							<ul class="navbar_user">
 
 								<li class="checkout">
-									<a href="/users/cart">
+									<a href="/WebQuanAo/users/cart">
 										<i id="checkout_items" class="fa fa-shopping-cart" aria-hidden="true"></i>
 										<span id="checkout_items" class="checkout_items"></span>
 									</a>

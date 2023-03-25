@@ -6,7 +6,6 @@ public class ProductsDTO {
 	private String image;
 	private String moTa;
 	private String tinhTrang;
-	private String slug;
 	private String maLoai;
 	private String image1;
 	private String image2;
@@ -44,12 +43,6 @@ public class ProductsDTO {
 	}
 	public void setTinhTrang(String tinhTrang) {
 		this.tinhTrang = tinhTrang;
-	}
-	public String getSlug() {
-		return slug;
-	}
-	public void setSlug(String slug) {
-		this.slug = slug;
 	}
 	public String getMaLoai() {
 		return maLoai;

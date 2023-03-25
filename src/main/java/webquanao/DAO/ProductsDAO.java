@@ -20,33 +20,40 @@ import webquanao.Service.IUsersService;
 public class ProductsDAO implements IProductService{
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	public List<ProductsDTO> GetDataSlide(){
+	
+	//Get All
+	@Override
+	public List<ProductsDTO> getProducts(){
 		List<ProductsDTO> list = new ArrayList<ProductsDTO>();
 		String sql = "SELECT * FROM product";
 		list = jdbcTemplate.query(sql,new ProductsBLL());
 		return list;
 	}
+	//Get by ID
     @Override
-	public List<ProductsDTO> findByID(String productID){
+	public List<ProductsDTO> findProductByID(String productID){
 		String sql = "SELECT * FROM product WHERE productID = ?";
         List<ProductsDTO> products =  jdbcTemplate.query(sql, new Object[]{productID}, new ProductsBLL());
 		return products;
 	}
-//    @Override
-//    public ProductsDTO findByID(String productID) {
-//        String sql = "SELECT * FROM product WHERE productID = ?";
-//        List<ProductsDTO> products =  jdbcTemplate.query(sql, new Object[]{productID}, new ProductsBLL());
-//        if(products.isEmpty()) {
-//            return null;
-//          } else {
-//            return products.get(0);
-//          }
-//    }
+    //Create new
     @Override
-	public List<ProductsDetailsDTO> GetDataDetailSlide(String productID){
-		String sql = "SELECT * FROM productdetails WHERE productID = ?";
-        List<ProductsDetailsDTO> products =  jdbcTemplate.query(sql, new Object[]{productID}, new ProductsDetailsBLL());
-		return products;
-	}
+    public void create(ProductsDTO product) {
+        String sql = "INSERT INTO product (productID,tenSanPham,image,moTa,tinhTrang,maLoai,image1,image2,image3) VALUES(?,?,?,?,?,?,?,?,?)";
+        jdbcTemplate.update(sql, product.getProductID(),product.getTenSanPham(),product.getImage(),product.getMoTa(),product.getTinhTrang(),product.getMaLoai(),product.getImage1(),product.getImage2(),product.getImage3());
+    }
+    //Update
+    @Override
+    public void update(ProductsDTO product) {
+        String sql = "UPDATE product SET productID = ?,tenSanPham = ?,image = ?,moTa = ?,tinhTrang = ?,maLoai = ?,image1 = ?,image2 = ?,image3 = ? WHERE productID = ?";
+        jdbcTemplate.update(sql, product.getProductID(),product.getTenSanPham(),product.getImage(),product.getMoTa(),product.getTinhTrang(),product.getMaLoai(),product.getImage1(),product.getImage2(),product.getImage3());
+      }
+    //Delete
+    @Override
+    public void delete(String productID) {
+        String sql = "DELETE FROM product WHERE productID = ?";
+        jdbcTemplate.update(sql, productID);
+      }
+
 
 }

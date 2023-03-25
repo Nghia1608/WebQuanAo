@@ -52,12 +52,12 @@
 				<div class="row">
 					<div class="col-lg-12 text-right">
 						<div class="logo_container">
-							<a href="/">Shop đồ <span>3ae</span></a>
+							<a href="/WebQuanAo">Shop đồ <span>3ae</span></a>
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
-								<li><a href="/">Trang chủ</a></li>
-								<li><a href="/contact">Liên hệ</a></li>
+								<li><a href="/WebQuanAo">Trang chủ</a></li>
+								<li><a href="/WebQuanAo/contact">Liên hệ</a></li>
 							</ul>
 							<ul class="navbar_user">
 

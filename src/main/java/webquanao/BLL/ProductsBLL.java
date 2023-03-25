@@ -18,7 +18,6 @@ public class ProductsBLL implements RowMapper<ProductsDTO>{
 		products.setImage(rs.getString("image"));
 		products.setMoTa(rs.getNString("moTa"));
 		products.setTinhTrang(rs.getNString("tinhTrang"));
-		products.setSlug(rs.getNString("slug"));
 		products.setMaLoai(rs.getNString("maLoai"));
 		products.setImage1(rs.getNString("image1"));
 		products.setImage2(rs.getNString("image2"));

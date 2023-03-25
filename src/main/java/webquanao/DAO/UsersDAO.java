@@ -30,7 +30,7 @@ public class UsersDAO implements IUsersService{
           }
     }
     @Override
-    public void register(UsersDTO user) {
+    public void create(UsersDTO user) {
         String sql = "INSERT INTO users (username,password,email,hoTen,sdt,quyen,diaChi,trangThai) VALUES(?,?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, user.getUsername(),user.getPassword(),user.getEmail(),user.getHoTen(), user.getSdt(),"Khach",user.getDiaChi(),"Đang hoạt động");
     }
