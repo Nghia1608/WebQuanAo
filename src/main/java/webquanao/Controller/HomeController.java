@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,7 @@ import webquanao.DAO.ProductsDAO;
 import webquanao.DAO.ProductsDetailsDAO;
 import webquanao.DAO.UsersDAO;
 import webquanao.DTO.ProductsDTO;
+import webquanao.DTO.ProductsDetailsDTO;
 import webquanao.DTO.UsersDTO;
 
 @Controller
@@ -122,8 +124,41 @@ public class HomeController {
         }
     }
     //Sua san pham
-    
-    
+	@RequestMapping(value = {"/product/{productID}/edit"})
+	public ModelAndView EditProduct(@PathVariable String productID) {	
+		
+		ModelAndView mv =new ModelAndView("product/edit");
+		mv.addObject("product",productsDAO.findProductByID(productID));
+		return mv;		
+	}
+    @PostMapping(value = {"/product/{productID}/edit"})
+    public String EditProduct(@ModelAttribute("product") ProductsDTO product,
+    		@RequestParam String productID)
+    		 {
+        List<ProductsDTO> productExist = productsDAO.findProductByID(productID);
+        if (productExist.size()==0) {
+            System.out.println("sản phẩm k tồn tại");
+            return "redirect:/product/storedProducts";
+        } else {
+        	productsDAO.update(product);
+        	System.out.println("Thanh cong");
+            return "redirect:/product/storedProducts";
+        }
+    }
+    //Xoa san pham
+    @RequestMapping(value = "/product/{productID}/delete", method = RequestMethod.POST)
+    public String DeleteProduct(@PathVariable("productID") String productID)
+    		 {
+        List<ProductsDTO> productExist = productsDAO.findProductByID(productID);
+        if (productExist.size()==0) {
+            System.out.println("sản phẩm k tồn tại");
+            return "redirect:/product/storedProducts";
+        } else {
+        	productsDAO.delete(productID);
+        	System.out.println("Thanh cong");
+            return "redirect:/product/storedProducts";
+        }
+    }
     //Product-Detail
 	//Chi tiet san pham theo san pham
 	@RequestMapping(value = {"/product/{productID}/detail"})
@@ -135,23 +170,22 @@ public class HomeController {
 		return mv;		
 	}
 	//Them chi tiet san pham
-	@RequestMapping("/product/createDetail")
-	public String CreateDetail() {		
-		return "/product/createDetail";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@RequestMapping(value = "/product/{productID}/createDetail", method = RequestMethod.GET)
+	public ModelAndView CreateDetailProduct(@PathVariable("productID") String productID) {			
+		ModelAndView mv =new ModelAndView("product/createDetail");
+		mv.addObject("product",productsDAO.findProductByID(productID));
+		return mv;		
+	}	
+    @RequestMapping(value = "/product/{productID}/createDetail", method = RequestMethod.POST)
+    public String CreateDetailProduct(@ModelAttribute("product") ProductsDetailsDTO productDetail,
+    		@RequestParam String productID)
+    		 {
+    	System.out.println("giaTienBanRa: " + productDetail.getGiaTienBanRa());
+        	productsDetailsDAO.create(productDetail);
+        	System.out.println("Thanh cong");
+            return "redirect:/product/{productID}/detail";
+    }
+
 	@RequestMapping("/")
 	public ModelAndView HomeUser() {	
 		ModelAndView mv =new ModelAndView("user/home");

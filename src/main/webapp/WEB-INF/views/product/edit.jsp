@@ -25,31 +25,26 @@
 								<!-- Currency / Language / My Account -->
 								<li class="account">
 									<a id="username"href="#">
-										Tài khoản {{users.userName}}
+										Tài khoản ${users.userName}
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
 
-
+										
 										<li id="changePassword"hidden><a><i class="fa fa-sign-in" aria-hidden="true"></i>Thông tin tài khoản</a></li>
 										<li id="purchase"hidden><a href="/users/purchase"><i class="fa fa-sign-in" aria-hidden="true"></i>Lịch sử mua hàng</a></li>
+										
 
 										<li id="login" hidden><a  href="/auth/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng nhập</a></li>
 										
 										<li>
 											<a id="logout"href="#"><i class="fa fa-user-plus" aria-hidden="true">
 											</i>Đăng xuất</a>
+    									
 										</li>
+
 										<script>
-											document.getElementById("logout").onclick = function(){
-    												sessionStorage.removeItem("username");
-													var logoutForm = document.forms['delete-product-form'];
-													logoutForm.action = '/auth/logout?_method=POST';
-													logoutForm.submit();
-											}
-										</script>
-										<script>
-											document.getElementById("login").hidden =false;
+document.getElementById("login").hidden =false;
 											if(
 												sessionStorage.getItem("username")
 											){
@@ -118,46 +113,123 @@
 
 	
 	<div class="container single_product_container">
-<div class="mt-4">
-  <h2> 
-    Danh sách sản phẩm
-  </h2>
-    <a href="/products/create">Thêm sản phẩm mới</a>
-    <table class="table">
-        <thead>
-            <tr>
-            <th scope="col">STT</th>
-            <th scope="col">Tên sản phẩm</th>
-            <th scope="col">Phân loại</th>
-            <th scope="col" colspan="2">Tình trạng</th>
-            </tr>
-        </thead>
-        <tbody>
-		<c:forEach var="item" items="${product}" varStatus="index">
-			<c:if test="${index.first}">
-			</c:if>
-			<c:if test="${not index.first}">							
-			</c:if>
-			<form id="delete-product-form" action="${pageContext.request.contextPath}/product/${item.productID}/delete" method="POST">
-			<input type="hidden" name="productID" value="${item.productID}">
-            <tr>
-            <th scope="row"></th>
-            <td>${item.tenSanPham}</td>
-            <td>${item.maLoai}</td>
-            <td>${item.tinhTrang}</td>
-            <td>
-                <a href="/WebQuanAo/product/${item.productID }/detail" class="btnUpdate btn-link">Chi tiết</a>
-                <a href="/WebQuanAo/product/${item.productID }/edit" class="btnUpdate btn-link">Sửa</a>
-<!--                 <a id="btn-select"href="" class="btnDelete btn-link">Xóa</a> -->
-	            <input type="submit"class="btnDelete btn-link" type="submit" value="Xóa">
-            </td>
-            </tr>
-            </form>
-		</c:forEach>
-        </tbody>
+		<div class="row">
+			<div class="col">
 
-    </table>
-</div>
+				<!-- Breadcrumbs -->
+
+				<div class="breadcrumbs d-flex flex-row align-items-center">
+
+				</div>
+
+			</div>
+		</div>
+	<c:forEach var="item" items="${product}" varStatus="index">
+    <form id="formTong"name="formTong" method="POST"action="${pageContext.request.contextPath}/product/${item.productID}/edit?_method=POST">
+
+		<div class="row">
+
+			<div class="col-lg-7">
+				<div class="single_product_pics">
+
+					<div class="row">
+					
+						<div class="col-lg-3 thumbnails_col order-lg-1 order-2">
+							<div class="single_product_thumbnails">
+								<ul>
+									<li><img src="${item.image1}" alt="" data-image="${item.image1}"></li>
+									<li class="active"><img src="${item.image2}" alt="" data-image="${item.image2}"></li>
+									<li><img src="${item.image3}" alt="" data-image="${item.image3}"></li>
+								</ul>
+							</div>
+
+						</div>
+						<div class="col-lg-9 image_col order-lg-2 order-1">
+							<div class="single_product_image">
+							<div class="single_product_image_background" style="background-image:url(${item.image})"></div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-5">
+				<div class="product_details">
+					<input type="text" class="form-control" value="${item.productID}" id="productID" name="productID" hidden=true>
+					<div class="form-group">
+						<h3 for="productsName">Tên sản phẩm</h3>
+						<input type="text" class="form-control" value="${item.tenSanPham}" id="tenSanPham" name="tenSanPham"placeholder="Tên sản phẩm">
+
+					</div>
+					<div class="form-group">
+						<h3 for="moTa">Mô tả sản phẩm</h3>
+						<textarea type="text" class="form-control" id="moTa" name="moTa"placeholder="Mô tả sản phẩm">${item.moTa}</textarea>
+					</div>
+												<div class="form-group">
+							<h4 for="moTa">Hình ảnh chính</h4>
+							<textarea type="text" class="form-control" id="image" name="image"placeholder="Liên kết hình ảnh">${item.image}</textarea>
+							<h4	for="moTa">Hình ảnh 1</h4>
+							<textarea type="text" class="form-control" id="image1" name="image1"placeholder="Liên kết hình ảnh 1">${item.image1}</textarea>
+							<h4 for="moTa">Hình ảnh 2</h4>
+							<textarea type="text" class="form-control" id="image2" name="image2"placeholder="Liên kết hình ảnh 2">${item.image2}</textarea>
+							<h4 for="moTa">Hình ảnh 3</h4>
+							<textarea type="text" class="form-control" id="image3" name="image3"placeholder="Liên kết hình ảnh 3">${item.image3}</textarea>
+						</div>
+					<div class="form-group">
+						<h3 for="tinhTrang">Tình trạng</h3>
+        				<input type="combobox" class="form-control" value="${item.tinhTrang}" id="tinhTrang"placeholder="Trình trạng sản phẩm" hidden>
+
+						<select id="selectTinhTrang" name="tinhTrang">
+						<option id="optTinhTrang0" value="Còn hàng">Còn hàng</option>
+						<option id="optTinhTrang1" value="Tạm hết hàng">Tạm hết hàng</option>
+						<option id="optTinhTrang2" value="Ngừng kinh doanh">Ngừng kinh doanh</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<h3 for="phanLoai">Phân loại</h3>
+        				<input type="combobox" class="form-control" value="${item.maLoai}" id="phanLoai"placeholder="Trình trạng sản phẩm" hidden>
+
+						<select id="selectPhanLoai" name="maLoai">
+						<option id="optPhanLoai0" value="nam">Nam</option>
+						<option id="optPhanLoai1" value="nu">Nữ</option>
+						<option id="optPhanLoai2" value="khac">Khác</option>
+						</select>
+					</div>
+                <div class="button">
+		          <input type="submit"class="btn btn-primary" type="submit" value="Lưu thông tin">
+		        </div>
+					<script>
+						var lengthSelect = document.getElementById("selectTinhTrang").length;
+						var temp = document.getElementById("tinhTrang").value;
+						for(var i=0;i<lengthSelect;i++){
+							var idOpt = "optTinhTrang"+i;
+var valueOpt = document.getElementById(idOpt).value;
+							if( valueOpt ==temp){
+						document.getElementById("selectTinhTrang").selectedIndex=i;
+
+							}
+						}
+
+						var lengthSelect1 = document.getElementById("selectPhanLoai").length;
+						var temp = document.getElementById("phanLoai").value;
+						for(var i=0;i<lengthSelect1;i++){
+							var idOpt = "optPhanLoai"+i;
+							var valueOpt = document.getElementById(idOpt).value;
+							if( valueOpt ==temp){
+						document.getElementById("selectPhanLoai").selectedIndex=i;
+
+							}
+						}
+					</script>
+				</div>
+                <br>
+			</div>
+		</div>
+
+        </form>
+				</c:forEach>
+	</div>
+
 
 	<!-- Benefit -->
 
@@ -184,7 +256,7 @@
 				</div>
 				<div class="col-lg-3 benefit_col">
 					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
+<div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
 						<div class="benefit_content">
 							<h6>Hoàn tiền</h6>
 							<p>Nếu sản phẩm bị lỗi do shop hoặc do vận chuyển</p>
@@ -203,9 +275,8 @@
 			</div>
 		</div>
 	</div>
+</div>
 
-
-	</div>
 <script src="<c:url value='/template/js/jquery-3.2.1.min.js'/>"></script>
 <script src="<c:url value='/template/styles/bootstrap4/popper.js'/>"></script>
 <script src="<c:url value='/template/styles/bootstrap4/bootstrap.min.js'/>"></script>

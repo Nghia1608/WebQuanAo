@@ -111,9 +111,13 @@
 <div class="mt-4">
 	<c:forEach var="item" items="${product}" varStatus="index">
     <h3>Thêm chi tiết sản phẩm ${item.tenSanPham}</h3>
-    </c:forEach>
-    <form id="formTong"name="formTong" method="POST">
+    <input type="text" class="form-control" value="${item.productID }" id="idProduct"name="productID"hidden>
 
+    <form id="formTong"name="formTong" method="POST" action="${pageContext.request.contextPath}/product/${item.productID}/createDetail?_method=POST">
+    <div class="form-group">
+        <label for="productDetailsID">Mã chi tiết sản phẩm</label>
+        <input type="text" class="form-control"value="" id="productDetailsID" name="productDetailsID"placeholder="Mã chi tiết sản phẩm">
+    </div>
     <div class="form-group">
         <label for="giaTienBanRa">Giá tiền bán ra</label>
         <input type="text" class="form-control"value="" id="giaTienBanRa" name="giaTienBanRa"placeholder="Giá tiền bán ra">
@@ -122,15 +126,36 @@
         <label for="soLuongCon">Số lượng còn</label>
         <input type="text" class="form-control" id="soLuongCon" name="soLuongCon"placeholder="Số lượng còn lại">
     </div>
-        <div class="form-group">
-        <label for="size">Size</label>
-        <input type="text" class="form-control" id="size"name="size"placeholder="Size S , M , L , XL ....">
-    </div>
-    <div class="form-group">
-        <h3 for="tinhTrang">Tình trạng</h3>
-        <input type="combobox" class="form-control" value="{{products.tinhTrang}}" id="tinhTrang"placeholder="Trình trạng sản phẩm" hidden>
-<input type="combobox" class="form-control" value="{{products._id}}" id="id"name="id"placeholder="Trình trạng sản phẩm" hidden>
+<!--         <div class="form-group"> -->
+<!--         <label for="size">Size</label> -->
+<!--         <input type="text" class="form-control" id="size"name="size"placeholder="Size S , M , L , XL ...."> -->
+<!--     </div> -->
 
+    <div class="form-group">
+    <h3 for="tinhTrang">Size</h3>
+	<input type="combobox" class="form-control" value="" id="size"placeholder="Trình trạng sản phẩm" hidden>
+        <select id="selectSize" name="size">
+        <option id="optSize0" value="S">S</option>
+        <option id="optSize1" value="M">M</option>
+        <option id="optSize2" value="L">L</option>
+        <option id="optSize3" value="XL">XL</option>
+        </select>
+    </div>
+        <script>
+        var lengthSelect1 = document.getElementById("selectSize").length;
+        var temp1 = document.getElementById("size").value;
+        for(var i=0;i<lengthSelect1;i++){
+            var idOpt1 = "optSize"+i;
+            var valueOpt1 = document.getElementById(idOpt1).value;
+            if( valueOpt1 ==temp1){
+        document.getElementById("selectSize").selectedIndex=i1;
+
+            }
+        }
+    </script>
+    <div class="form-group">
+    <h3 for="tinhTrang">Tình trạng</h3>
+    <input type="combobox" class="form-control" value="" id="tinhTrang"placeholder="Trình trạng sản phẩm" hidden>
         <select id="selectTinhTrang" name="tinhTrang">
         <option id="optTinhTrang0" value="Còn hàng">Còn hàng</option>
         <option id="optTinhTrang1" value="Tạm hết hàng">Tạm hết hàng</option>
@@ -153,52 +178,16 @@
         }
         }
     </script>
-    <div class="form-group">
-        <input type="text" class="form-control" value="{{products._id}}" id="idProduct"name="idProduct"hidden>
-    </div>
-        <a id="btn-select"href="" class="btn btn-primary" data-id="{{this._id}}" data-toggle="modal" data-target="#exampleModalRestore">Thêm mới<i></i></a>
 
+
+    <div class="button">
+      <input type="submit"class="btn btn-primary" type="submit" value="Lưu thông tin">
+    </div>
     </form>
+        </c:forEach>
 </div>
 	</div>
-<div class="modal fade" id="exampleModalRestore" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Xác nhận thêm</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Bạn có chắc muốn thêm sản phẩm ?</p>
-      </div>
-      <div class="modal-footer">
-        <button id="btn-restore" type="button" class="btnUpdate1 btn-link">Xác nhận</button>
-        <button type="button" class="btnCancel btn-link" data-dismiss="modal">Hủy</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-	<script>
-
-		document.getElementById("btn-restore").onclick = function(){
-
-				var logoutForm = document.forms['formTong'];
-				logoutForm.action = '/products/storeDetail?_method=POST';
-				logoutForm.submit();
-		}
-
-		document.getElementById("logout").onclick = function(){
-				sessionStorage.removeItem("username");
-
-				var logoutForm = document.forms['formTong'];
-
-				logoutForm.action = '/auth/logout?_method=POST';
-				logoutForm.submit();
-		}
-	</script>
 
 	<!-- Benefit -->
 

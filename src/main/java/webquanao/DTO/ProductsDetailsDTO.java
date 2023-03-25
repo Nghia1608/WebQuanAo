@@ -1,11 +1,14 @@
 package webquanao.DTO;
 
 public class ProductsDetailsDTO {
-	public String getProductsDetailsID() {
-		return productsDetailsID;
+	public ProductsDetailsDTO() {
+		super();
 	}
-	public void setProductsDetailsID(String productsDetailsID) {
-		this.productsDetailsID = productsDetailsID;
+	public String getProductDetailsID() {
+		return productDetailsID;
+	}
+	public void setProductDetailsID(String productDetailsID) {
+		this.productDetailsID = productDetailsID;
 	}
 	public int getGiaTienBanRa() {
 		return giaTienBanRa;
@@ -37,10 +40,8 @@ public class ProductsDetailsDTO {
 	public void setSize(String size) {
 		this.size = size;
 	}
-	public ProductsDetailsDTO() {
-		super();
-	}
-	private String productsDetailsID;
+
+	private String productDetailsID;
 	private int giaTienBanRa;
 	private int soLuongCon;
 	private String tinhTrang;

@@ -45,8 +45,8 @@ public class ProductsDAO implements IProductService{
     //Update
     @Override
     public void update(ProductsDTO product) {
-        String sql = "UPDATE product SET productID = ?,tenSanPham = ?,image = ?,moTa = ?,tinhTrang = ?,maLoai = ?,image1 = ?,image2 = ?,image3 = ? WHERE productID = ?";
-        jdbcTemplate.update(sql, product.getProductID(),product.getTenSanPham(),product.getImage(),product.getMoTa(),product.getTinhTrang(),product.getMaLoai(),product.getImage1(),product.getImage2(),product.getImage3());
+        String sql = "UPDATE product SET tenSanPham = ?, image = ?, moTa = ?, tinhTrang = ?, maLoai = ?, image1 = ?, image2 = ?, image3 = ? WHERE productID = ?";
+        jdbcTemplate.update(sql, product.getTenSanPham(),product.getImage(),product.getMoTa(),product.getTinhTrang(),product.getMaLoai(),product.getImage1(),product.getImage2(),product.getImage3(),product.getProductID());
       }
     //Delete
     @Override

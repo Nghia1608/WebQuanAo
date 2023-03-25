@@ -30,26 +30,21 @@
 									</a>
 									<ul class="account_selection">
 
-
+										{{!-- After Login --}}
 										<li id="changePassword"hidden><a><i class="fa fa-sign-in" aria-hidden="true"></i>Thông tin tài khoản</a></li>
 										<li id="purchase"hidden><a href="/users/purchase"><i class="fa fa-sign-in" aria-hidden="true"></i>Lịch sử mua hàng</a></li>
+										{{!-- Before Login --}}
 
 										<li id="login" hidden><a  href="/auth/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng nhập</a></li>
 										
 										<li>
 											<a id="logout"href="#"><i class="fa fa-user-plus" aria-hidden="true">
 											</i>Đăng xuất</a>
+    									{{!-- <button type="submit" class="btn btn-primary">Đăng xuất</button> --}}
 										</li>
+
 										<script>
-											document.getElementById("logout").onclick = function(){
-    												sessionStorage.removeItem("username");
-													var logoutForm = document.forms['delete-product-form'];
-													logoutForm.action = '/auth/logout?_method=POST';
-													logoutForm.submit();
-											}
-										</script>
-										<script>
-											document.getElementById("login").hidden =false;
+document.getElementById("login").hidden =false;
 											if(
 												sessionStorage.getItem("username")
 											){
@@ -116,47 +111,55 @@
 
 	</header>
 
-	
 	<div class="container single_product_container">
-<div class="mt-4">
-  <h2> 
-    Danh sách sản phẩm
-  </h2>
-    <a href="/products/create">Thêm sản phẩm mới</a>
-    <table class="table">
-        <thead>
-            <tr>
-            <th scope="col">STT</th>
-            <th scope="col">Tên sản phẩm</th>
-            <th scope="col">Phân loại</th>
-            <th scope="col" colspan="2">Tình trạng</th>
-            </tr>
-        </thead>
-        <tbody>
-		<c:forEach var="item" items="${product}" varStatus="index">
-			<c:if test="${index.first}">
-			</c:if>
-			<c:if test="${not index.first}">							
-			</c:if>
-			<form id="delete-product-form" action="${pageContext.request.contextPath}/product/${item.productID}/delete" method="POST">
-			<input type="hidden" name="productID" value="${item.productID}">
-            <tr>
-            <th scope="row"></th>
-            <td>${item.tenSanPham}</td>
-            <td>${item.maLoai}</td>
-            <td>${item.tinhTrang}</td>
-            <td>
-                <a href="/WebQuanAo/product/${item.productID }/detail" class="btnUpdate btn-link">Chi tiết</a>
-                <a href="/WebQuanAo/product/${item.productID }/edit" class="btnUpdate btn-link">Sửa</a>
-<!--                 <a id="btn-select"href="" class="btnDelete btn-link">Xóa</a> -->
-	            <input type="submit"class="btnDelete btn-link" type="submit" value="Xóa">
-            </td>
-            </tr>
-            </form>
-		</c:forEach>
-        </tbody>
+	<div class="mt-4">
+	<c:forEach var="item" items="${product}" varStatus="index">
+    <form id="formTong"name="formTong" method="POST">
 
-    </table>
+    <div class="form-group">
+        <label for="giaTienBanRa">Giá tiền bán ra</label>
+        <input type="text" class="form-control"value="{{productsdetails.giaTienBanRa}}" id="giaTienBanRa" name="giaTienBanRa"placeholder="Giá tiền bán ra">
+    </div>
+    <div class="form-group">
+        <label for="soLuongCon">Số lượng còn</label>
+        <input type="text" class="form-control" id="soLuongCon"value="{{productsdetails.soLuongCon}}" name="soLuongCon"placeholder="Số lượng còn lại">
+    </div>
+        <div class="form-group">
+        <label for="size">Trọng lượng (g)</label>
+        <input type="text" class="form-control"value="{{productsdetails.size}}" id="size"name="size"placeholder="Trọng lượng sản phẩm (g)">
+    </div>
+    <div class="form-group">
+        <h3 for="tinhTrang">Tình trạng</h3>
+<input type="combobox" class="form-control" value="{{productsdetails.tinhTrang}}" id="tinhTrang"name="tinhTrang"placeholder="Trình trạng sản phẩm" hidden>
+
+        <select id="selectTinhTrang" name="selectTinhTrang">
+        <option id="optTinhTrang0" value="Còn hàng">Còn hàng</option>
+        <option id="optTinhTrang1" value="Tạm hết hàng">Tạm hết hàng</option>
+        <option id="optTinhTrang2" value="Ngừng kinh doanh">Ngừng kinh doanh</option>
+        </select>
+    </div>
+        <input type="combobox" class="form-control" value="{{productsdetails.idProduct}}" id="idProduct"name="idProduct"hidden>
+        <input type="text" class="form-control" value="{{productsdetails._id}}" id="idSP"hidden>
+
+    <script>
+        var lengthSelect = document.getElementById("selectTinhTrang").length;
+        var temp = document.getElementById("tinhTrang").value;
+        for(var i=0;i<lengthSelect;i++){
+            var idOpt = "optTinhTrang"+i;
+            var valueOpt = document.getElementById(idOpt).value;
+            if( valueOpt ==temp){
+        document.getElementById("selectTinhTrang").selectedIndex=i;
+
+            }
+        document.getElementById("giaTienBanRa").oninput = function(){
+            var soTien = document.getElementById("giaTienBanRa").value
+            document.getElementById("giaTienBanRa").innerHTML = parseInt(soTien).toLocaleString() +"  VND";
+        }
+        }
+    </script>
+    </form>
+    </c:forEach>
+</div>
 </div>
 
 	<!-- Benefit -->
@@ -203,8 +206,6 @@
 			</div>
 		</div>
 	</div>
-
-
 	</div>
 <script src="<c:url value='/template/js/jquery-3.2.1.min.js'/>"></script>
 <script src="<c:url value='/template/styles/bootstrap4/popper.js'/>"></script>

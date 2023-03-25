@@ -13,7 +13,7 @@ public class ProductsDetailsBLL implements RowMapper<ProductsDetailsDTO>{
 	public ProductsDetailsDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		// TODO Auto-generated method stub
 		ProductsDetailsDTO ProductsDetails = new ProductsDetailsDTO();
-		ProductsDetails.setProductsDetailsID(rs.getString("productDetailsID"));
+		ProductsDetails.setProductDetailsID(rs.getString("productDetailsID"));
 		ProductsDetails.setGiaTienBanRa(rs.getInt("giaTienBanRa"));
 		ProductsDetails.setSoLuongCon(rs.getInt("soLuongCon"));
 		ProductsDetails.setTinhTrang(rs.getNString("tinhTrang"));

@@ -127,9 +127,10 @@
 	  <h3 class="free_delivery d-flex flex-row align-items-center justify-content-center"> 
 	    Chi tiết sản phẩm ${item.tenSanPham}
 	  </h3>
+      <a href="${pageContext.request.contextPath}/product/${item.productID}/createDetail">Thêm chi tiết sản phẩm</a>
 	</c:forEach>  
 
-    <a href="/products/${item.productID}/createDetail">Thêm chi tiết sản phẩm</a>
+
 
     <table class="table">
         <thead>

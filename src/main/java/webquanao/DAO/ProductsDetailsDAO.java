@@ -27,14 +27,14 @@ public class ProductsDetailsDAO implements IProductDetailService{
     //Create new
     @Override
     public void create(ProductsDetailsDTO productDetail) {
-        String sql = "INSERT INTO productdetails (productDetailsID,giaTienBanRa,soLuongCon,tinhTrang,productID,size) VALUES(?,?,?,?,?,?,?,?,?)";
-        jdbcTemplate.update(sql, productDetail.getProductsDetailsID(),productDetail.getGiaTienBanRa(),productDetail.getSoLuongCon(),productDetail.getTinhTrang(),productDetail.getProductID(),productDetail.getSize());
+        String sql = "INSERT INTO productdetails (productDetailsID,giaTienBanRa,soLuongCon,tinhTrang,productID,size) VALUES(?,?,?,?,?,?)";
+        jdbcTemplate.update(sql, productDetail.getProductDetailsID(),productDetail.getGiaTienBanRa(),productDetail.getSoLuongCon(),productDetail.getTinhTrang(),productDetail.getProductID(),productDetail.getSize());
     }
     //Update
     @Override
     public void update(ProductsDetailsDTO productDetail) {
         String sql = "UPDATE productdetails SET productDetailsID = ?,giaTienBanRa = ?,soLuongCon = ?,tinhTrang = ?,productID = ?,size = ? WHERE productID = ?";
-        jdbcTemplate.update(sql, productDetail.getProductsDetailsID(),productDetail.getGiaTienBanRa(),productDetail.getSoLuongCon(),productDetail.getTinhTrang(),productDetail.getProductID(),productDetail.getSize());
+        jdbcTemplate.update(sql, productDetail.getProductDetailsID(),productDetail.getGiaTienBanRa(),productDetail.getSoLuongCon(),productDetail.getTinhTrang(),productDetail.getProductID(),productDetail.getSize());
       }
     //Delete
     @Override
