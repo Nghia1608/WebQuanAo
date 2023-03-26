@@ -6,140 +6,53 @@
     
 <div class="super_container">
 
-	<!-- Header -->
-
-	<header class="header trans_300">
-
-		<!-- Top Navigation -->
-
-		<div class="top_nav">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="top_nav_left">Miễn phí đơn hàng trên 300.000 VNĐ và nhiều ưu đãi</div>
-					</div>
-					<div class="col-md-6 text-right">
-						<div class="top_nav_right">
-							<ul class="top_nav_menu">
-
-								<!-- Currency / Language / My Account -->
-								<li class="account">
-									<a id="username"href="#">
-										Tài khoản {{users.userName}}
-										<i class="fa fa-angle-down"></i>
-									</a>
-									<ul class="account_selection">
-
-										{{!-- After Login --}}
-										<li id="changePassword"hidden><a><i class="fa fa-sign-in" aria-hidden="true"></i>Thông tin tài khoản</a></li>
-										<li id="purchase"hidden><a href="/users/purchase"><i class="fa fa-sign-in" aria-hidden="true"></i>Lịch sử mua hàng</a></li>
-										{{!-- Before Login --}}
-
-										<li id="login" hidden><a  href="/auth/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng nhập</a></li>
-										
-										<li>
-											<a id="logout"href="#"><i class="fa fa-user-plus" aria-hidden="true">
-											</i>Đăng xuất</a>
-    									{{!-- <button type="submit" class="btn btn-primary">Đăng xuất</button> --}}
-										</li>
-
-										<script>
-document.getElementById("login").hidden =false;
-											if(
-												sessionStorage.getItem("username")
-											){
-												document.getElementById("username").innerHTML ="Xin chào  " + 
-													sessionStorage.getItem("username");
-												document.getElementById("changePassword").hidden =false;
-												document.getElementById("purchase").hidden =false;
-												document.getElementById("login").hidden =true;
-
-											}
-
-											</script>
-											
-									</ul>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Main Navigation -->
-
-		<div class="main_nav_container">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12 text-right">
-						<div class="logo_container">
-							<a href="/">NghiaTai<span>Shop</span></a>
-						</div>
-						<nav class="navbar">
-							<ul class="navbar_menu">
-								<li><a href="/">Trang chủ</a></li>
-								<li><a href="/contact">Liên hệ</a></li>
-								<li>
-									<div class="dropdown">
-									<a class="" href="#" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-										Quản lý
-									</a>
-									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-										<li><a class="dropdown-item" href="/products/storedProducts">Sản phẩm</a></li>
-										<li><a class="dropdown-item" href="/users/storedUsers">Tài khoản</a></li>
-										<li><a class="dropdown-item" href="#">Thống kê</a></li>
-									</ul>
-									</div>
-								</li>
-							</ul>
-							<ul class="navbar_user">
-
-								<li class="checkout">
-									<a href="/users/cart">
-										<i id="checkout_items" class="fa fa-shopping-cart" aria-hidden="true"></i>
-										<span id="checkout_items" class="checkout_items"></span>
-									</a>
-								</li>
-							</ul>
-
-						</nav>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</header>
-
 	<div class="container single_product_container">
 	<div class="mt-4">
-	<c:forEach var="item" items="${product}" varStatus="index">
+  	<h3 class="free_delivery d-flex flex-row align-items-center justify-content-center"> 
+	    Sửa chi tiết sản phẩm ${productDetail.product.tenSanPham}
+    </h3>
     <form id="formTong"name="formTong" method="POST">
 
     <div class="form-group">
         <label for="giaTienBanRa">Giá tiền bán ra</label>
-        <input type="text" class="form-control"value="{{productsdetails.giaTienBanRa}}" id="giaTienBanRa" name="giaTienBanRa"placeholder="Giá tiền bán ra">
+        <input type="text" class="form-control"value="${productDetail.giaTienBanRa}" id="giaTienBanRa" name="giaTienBanRa"placeholder="Giá tiền bán ra">
     </div>
     <div class="form-group">
         <label for="soLuongCon">Số lượng còn</label>
-        <input type="text" class="form-control" id="soLuongCon"value="{{productsdetails.soLuongCon}}" name="soLuongCon"placeholder="Số lượng còn lại">
+        <input type="text" class="form-control" id="soLuongCon"value="${productDetail.soLuongCon}" name="soLuongCon"placeholder="Số lượng còn lại">
+   	<div class="form-group">
+        <h3 for="size">Size</h3>
+		<input type="combobox" class="form-control" value="${productDetail.size}" id="size"name="size"hidden>
+        <select id="selectSize" name="selectSize">
+        <option id="optSize0" value="S">S</option>
+        <option id="optSize1" value="M">M</option>
+        <option id="optSize2" value="L">L</option>
+        <option id="optSize3" value="XL">XL</option>
+        </select>
     </div>
-        <div class="form-group">
-        <label for="size">Trọng lượng (g)</label>
-        <input type="text" class="form-control"value="{{productsdetails.size}}" id="size"name="size"placeholder="Trọng lượng sản phẩm (g)">
-    </div>
+        <script>
+        var lengthSelect1 = document.getElementById("selectSize").length;
+        var temp1 = document.getElementById("size").value;
+        for(var i=0;i<lengthSelect1;i++){
+            var idOpt1 = "optSize"+i;
+            var valueOpt1 = document.getElementById(idOpt1).value;
+            if( valueOpt1 ==temp1){
+        		document.getElementById("selectSize").selectedIndex=i;
+            }
+        }
+    </script>
+    
     <div class="form-group">
         <h3 for="tinhTrang">Tình trạng</h3>
-<input type="combobox" class="form-control" value="{{productsdetails.tinhTrang}}" id="tinhTrang"name="tinhTrang"placeholder="Trình trạng sản phẩm" hidden>
-
+		<input type="combobox" class="form-control" value="${productDetail.tinhTrang}" id="tinhTrang"name="tinhTrang"placeholder="Trình trạng sản phẩm" hidden>
         <select id="selectTinhTrang" name="selectTinhTrang">
         <option id="optTinhTrang0" value="Còn hàng">Còn hàng</option>
         <option id="optTinhTrang1" value="Tạm hết hàng">Tạm hết hàng</option>
         <option id="optTinhTrang2" value="Ngừng kinh doanh">Ngừng kinh doanh</option>
         </select>
     </div>
-        <input type="combobox" class="form-control" value="{{productsdetails.idProduct}}" id="idProduct"name="idProduct"hidden>
-        <input type="text" class="form-control" value="{{productsdetails._id}}" id="idSP"hidden>
+        <input type="combobox" class="form-control" value="${productDetail.productID}" id="idProduct"name="idProduct"hidden>
+        <input type="text" class="form-control" value="${productDetail.productDetailsID}" id="idSP"hidden>
 
     <script>
         var lengthSelect = document.getElementById("selectTinhTrang").length;
@@ -158,54 +71,9 @@ document.getElementById("login").hidden =false;
         }
     </script>
     </form>
-    </c:forEach>
 </div>
 </div>
 
-	<!-- Benefit -->
-
-	<div class="benefit">
-		<div class="container">
-			<div class="row benefit_row">
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Miễn Phí Giao Hàng</h6>
-							<p>Cho đơn hàng 300k trên</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Thanh toán</h6>
-							<p>Thanh toán khi nhận hàng hoặc thanh toán online</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Hoàn tiền</h6>
-							<p>Nếu sản phẩm bị lỗi do shop hoặc do vận chuyển</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Từ T2 - CN</h6>
-							<p>8:00 AM - 10:00 PM</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 	</div>
 <script src="<c:url value='/template/js/jquery-3.2.1.min.js'/>"></script>
 <script src="<c:url value='/template/styles/bootstrap4/popper.js'/>"></script>

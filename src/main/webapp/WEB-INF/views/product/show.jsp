@@ -13,35 +13,31 @@
 		<div class="row">
 
 			<div class="col-lg-7">
-				<div class="single_product_pics">
-					<c:forEach var="item" items="${product}" varStatus="index">
+				<div class="single_product_pics">					
 					<div class="row">
 						<div class="col-lg-3 thumbnails_col order-lg-1 order-2">
 							<div class="single_product_thumbnails">
 
 								<ul>
-									<li><img src="${item.image1}" alt="" data-image="${item.image1}"></li>
-									<li class="active"><img src="${item.image2}" alt="" data-image="${item.image2}"></li>
-									<li><img src="${item.image3}" alt="" data-image="${item.image3}"></li>
+									<li><img src="${product.image1}" alt="" data-image="${product.image1}"></li>
+									<li class="active"><img src="${product.image2}" alt="" data-image="${product.image2}"></li>
+									<li><img src="${product.image3}" alt="" data-image="${product.image3}"></li>
 								</ul>
 								
 							</div>
 						</div>
 						<div class="col-lg-9 image_col order-lg-2 order-1">
 							<div class="single_product_image">
-								<div class="single_product_image_background" style="background-image:url(${item.image})"></div>
+								<div class="single_product_image_background" style="background-image:url(${product.image})"></div>
 							</div>
 						</div>
 					</div>
-					</c:forEach>
 				</div>
 			</div>
 			<div class="col-lg-5">
 				<div class="product_details">
 					<div class="product_details_title">
-						<c:forEach var="item" items="${product}" varStatus="index">
-							<h2>${item.tenSanPham }</h2>
-						</c:forEach>		
+							<h2>${product.tenSanPham }</h2>
 					</div>
 					<div class="free_delivery d-flex flex-row align-items-center justify-content-center">
 						<span class="ti-truck"></span><span>Giao hàng TP.HCM</span>

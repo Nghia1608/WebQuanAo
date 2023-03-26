@@ -113,8 +113,8 @@ public class HomeController {
     public String Create(@ModelAttribute("product") ProductsDTO product,
     		@RequestParam String productID)
     		 {
-        List<ProductsDTO> productExist = productsDAO.findProductByID(productID);
-        if (productExist.size()!=0) {
+        ProductsDTO productExist = productsDAO.findProductByID(productID);
+        if (productExist==null) {
             System.out.println("Trung ma san pham");
             return "redirect:/product/create";
         } else {
@@ -135,8 +135,8 @@ public class HomeController {
     public String EditProduct(@ModelAttribute("product") ProductsDTO product,
     		@RequestParam String productID)
     		 {
-        List<ProductsDTO> productExist = productsDAO.findProductByID(productID);
-        if (productExist.size()==0) {
+        ProductsDTO productExist = productsDAO.findProductByID(productID);
+        if (productExist==null) {
             System.out.println("sản phẩm k tồn tại");
             return "redirect:/product/storedProducts";
         } else {
@@ -149,8 +149,8 @@ public class HomeController {
     @RequestMapping(value = "/product/{productID}/delete", method = RequestMethod.POST)
     public String DeleteProduct(@PathVariable("productID") String productID)
     		 {
-        List<ProductsDTO> productExist = productsDAO.findProductByID(productID);
-        if (productExist.size()==0) {
+        ProductsDTO productExist = productsDAO.findProductByID(productID);
+        if (productExist==null) {
             System.out.println("sản phẩm k tồn tại");
             return "redirect:/product/storedProducts";
         } else {
@@ -160,7 +160,7 @@ public class HomeController {
         }
     }
     //Product-Detail
-	//Chi tiet san pham theo san pham
+	//Show chi tiet san pham theo san pham
 	@RequestMapping(value = {"/product/{productID}/detail"})
 	public ModelAndView ProductDetailList(@PathVariable String productID) {	
 		
@@ -185,7 +185,31 @@ public class HomeController {
         	System.out.println("Thanh cong");
             return "redirect:/product/{productID}/detail";
     }
-
+    //Sua chi tiet san pham
+    @RequestMapping(value = "/product/{productDetailsID}/editDetail")
+    public ModelAndView editProductDetail(@PathVariable String productDetailsID) {     
+        ModelAndView mv = new ModelAndView("product/editDetail");
+        ProductsDetailsDTO productDetail = productsDetailsDAO.findProductDetailByID(productDetailsID);
+        ProductsDTO product = productsDAO.findProductByID(productDetail.getProductID());
+        productDetail.setProduct(product);
+        mv.addObject("productDetail", productDetail);
+        return mv;
+    }
+    @PostMapping(value = {"/product/{productDetailID}/editDetail"})
+    public String EditProductDetail(@ModelAttribute("productsDetail") ProductsDetailsDTO productDetail,
+    		@RequestParam String productDetailsID,@RequestParam String productID)
+    		 {
+        ProductsDTO productExist = productsDAO.findProductByID(productID);
+        if (productExist==null) {
+            System.out.println("sản phẩm k tồn tại");
+            return "redirect:/product/{productID}/detail";
+        } else {
+        	productsDetailsDAO.update(productDetail);
+        	System.out.println("Thanh cong");
+            return "redirect:/product/{productID}/detail";
+        }
+    }
+    //
 	@RequestMapping("/")
 	public ModelAndView HomeUser() {	
 		ModelAndView mv =new ModelAndView("user/home");

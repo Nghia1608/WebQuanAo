@@ -31,11 +31,11 @@ public class ProductsDAO implements IProductService{
 	}
 	//Get by ID
     @Override
-	public List<ProductsDTO> findProductByID(String productID){
-		String sql = "SELECT * FROM product WHERE productID = ?";
-        List<ProductsDTO> products =  jdbcTemplate.query(sql, new Object[]{productID}, new ProductsBLL());
-		return products;
-	}
+    public ProductsDTO findProductByID(String productID) {
+        String sql = "SELECT * FROM product WHERE productID = ?";
+        List<ProductsDTO> products = jdbcTemplate.query(sql, new Object[]{productID}, new ProductsBLL());
+        return products.isEmpty() ? null : products.get(0);
+    }
     //Create new
     @Override
     public void create(ProductsDTO product) {

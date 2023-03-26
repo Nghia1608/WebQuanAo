@@ -40,6 +40,13 @@ public class ProductsDetailsDTO {
 	public void setSize(String size) {
 		this.size = size;
 	}
+    public ProductsDTO getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductsDTO product) {
+        this.product = product;
+    }
 
 	private String productDetailsID;
 	private int giaTienBanRa;
@@ -47,5 +54,6 @@ public class ProductsDetailsDTO {
 	private String tinhTrang;
 	private String productID;
 	private String size;
+	private ProductsDTO product;
 
 }

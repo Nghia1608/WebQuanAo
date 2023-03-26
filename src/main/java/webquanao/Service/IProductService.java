@@ -6,8 +6,7 @@ import webquanao.DTO.ProductsDTO;
 
 public interface IProductService {
 	List<ProductsDTO> getProducts();
-	List<ProductsDTO> findProductByID(String productID);
-
+	ProductsDTO findProductByID(String productID);
 	void create(ProductsDTO product);
 	void update(ProductsDTO product);
 	void delete(String productID);
