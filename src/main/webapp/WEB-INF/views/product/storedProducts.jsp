@@ -11,7 +11,7 @@
   <h2> 
     Danh sách sản phẩm
   </h2>
-    <a href="/products/create">Thêm sản phẩm mới</a>
+    <a href="${pageContext.request.contextPath}/product/create">Thêm sản phẩm mới</a>
     <table class="table">
         <thead>
             <tr>

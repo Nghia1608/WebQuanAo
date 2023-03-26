@@ -33,6 +33,8 @@
 							<c:if test="${not index.first}">
 							
 							</c:if>
+			<form id="delete-product-form" action="${pageContext.request.contextPath}/product/${item.productDetailsID}/deleteDetail" method="POST">
+			<input type="hidden" name="productDetailsID" value="${item.productDetailsID}">
             <tr>
             <th scope="row"></th>
             <td>
@@ -49,16 +51,15 @@
             </td>
             <td>
                 <a href="${pageContext.request.contextPath}/product/${item.productDetailsID}/editDetail" class="btnUpdate btn-link">Sửa</a>
-                <a id="btn-select"href="" class="btnDelete btn-link" data-id="${item.productID}" data-toggle="modal" data-target="#exampleModal">Xóa</a>
+	            <input type="submit"class="btnDelete btn-link" type="submit" value="Xóa">
 
             </td>
             </tr>
             <input type="text" class="form-control" value="${item.giaTienBanRa}" id="giaTienBanRaSP${item.giaTienBanRa}" name="giaTienBanRa${item.giaTienBanRa}" hidden>
-
+			</form>
             <script>
                 //size
-                    var sizeHienThi${item.giaTienBanRa} = "size"+"${item.giaTienBanRa}"
-                    //document.getElementById(sizeHienThi${item.giaTienBanRa}).innerHTML = (${item.size}).toLocaleString() + "  g";     
+                    var sizeHienThi${item.giaTienBanRa} = "size"+"${item.giaTienBanRa}"    
                 //soluong
                     var soLuongConHienThi${item.giaTienBanRa} = "soLuongCon"+${item.giaTienBanRa}
                     document.getElementById(soLuongConHienThi${item.giaTienBanRa}).innerHTML = (${item.soLuongCon}).toLocaleString();   
@@ -73,67 +74,6 @@
 
     </table>
 </div>
-<!--Confirm Delete Button -->
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Xác nhận xóa</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Bạn có chắc muốn xóa sản phẩm ?</p>
-      </div>
-      <div class="modal-footer">
-        <a id="count-down">Wait for Available</a>
-        <button id="btn-delete" type="button" class="btnDelete1 btn-link">Xác nhận xóa</button>
-        <button type="button" class="btnCancel btn-link" data-dismiss="modal">Hủy</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--Form Xóa-->
-    <form name="delete-product-form" method="POST">
-
-<!--Disable Delete Button trong 10s-->
-<script>
-      var btnselect = document.getElementById('btn-select');
-      var countdown = document.getElementById('count-down');
-       btnselect.onclick =  function() {
-            document.getElementById("btn-delete").disabled = true;
-            setTimeout(function() {
-                document.getElementById("btn-delete").disabled = false;
-            }, 10000);
-            document.getElementById("count-down").hidden = false;
-            setTimeout(function() {
-                document.getElementById("count-down").hidden = true;
-            }, 10000);
-        }
-        
-</script>
-
-
-<!--Event xóa-->
-<script>
-    document.addEventListener('DOMContentLoaded',function(){
-        var id;
-        var deleteForm = document.forms['delete-product-form'];
-        var btnDelete = document.getElementById('btn-delete');
-        $('#exampleModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) 
-        id = button.data('id')
-        });
-        btnDelete.onclick = function(){
-            deleteForm.action = '/products/'+id + '/deleteDetail?_method=DELETE';
-
-            deleteForm.submit();
-        }
-    })
-</script>
     
   </div>
 	</div>

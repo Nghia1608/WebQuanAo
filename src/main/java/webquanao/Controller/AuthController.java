@@ -27,8 +27,8 @@ import webquanao.DTO.ProductsDetailsDTO;
 import webquanao.DTO.UsersDTO;
 
 @Controller
-public class HomeController {
-	//Admin
+@RequestMapping("/auth")
+public class AuthController {
 	@Autowired
 	ProductsDAO productsDAO;
 	@Autowired
@@ -39,24 +39,42 @@ public class HomeController {
     public void setUserDao(UsersDAO userDao) {
         this.userDao = userDao;
     }
+    
+    @GetMapping("/login")
+    public String showLoginForm(Model model) {
+        model.addAttribute("user", new UsersDTO());
+        return "auth/login";
+    }
+    @PostMapping("/login")
+    public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
+        UsersDTO user = userDao.findByUsername(username);
+        if (user != null && user.getPassword().equals(password)) {
+            session.setAttribute("user", user);
+            System.out.println("thanh cong");
+            return "redirect:/admin";
+        } else {
+        	System.out.println("that bai");
+            return "auth/login";
+        }
+    }
 
-	@RequestMapping("/admin")
-	public String Admin() {		
-		return "admin/dashboard";
+	@RequestMapping("/register")
+	public String UserRegister() {		
+		return "auth/register";
 	}
-	
 
-	@RequestMapping("/contact")
-	public String Contact() {		
-		return "user/contact";
-	}
+    @PostMapping("/register")
+    public String register(@ModelAttribute("user") UsersDTO user,@RequestParam String username)
+    		 {
+        UsersDTO userExist = userDao.findByUsername(username);
+        if (userExist!=null) {
+            System.out.println("Trung username");
+            return "redirect:/auth/register";
+        } else {
+            userDao.create(user);
+        	System.out.println("Thanh cong");
+            return "auth/login";
+        }
+    }
 
-
-    //
-	@RequestMapping("/")
-	public ModelAndView HomeUser() {	
-		ModelAndView mv =new ModelAndView("user/home");
-		mv.addObject("product",productsDAO.getProducts());
-		return mv;		
-	}
 }

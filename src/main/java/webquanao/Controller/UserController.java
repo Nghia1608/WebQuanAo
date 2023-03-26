@@ -27,8 +27,8 @@ import webquanao.DTO.ProductsDetailsDTO;
 import webquanao.DTO.UsersDTO;
 
 @Controller
-public class HomeController {
-	//Admin
+@RequestMapping("/user")
+public class UserController {
 	@Autowired
 	ProductsDAO productsDAO;
 	@Autowired
@@ -40,23 +40,12 @@ public class HomeController {
         this.userDao = userDao;
     }
 
-	@RequestMapping("/admin")
-	public String Admin() {		
-		return "admin/dashboard";
-	}
-	
-
-	@RequestMapping("/contact")
-	public String Contact() {		
-		return "user/contact";
-	}
-
-
-    //
-	@RequestMapping("/")
-	public ModelAndView HomeUser() {	
-		ModelAndView mv =new ModelAndView("user/home");
+	//Danh sach san pham
+	@RequestMapping("/storedProducts")
+	public ModelAndView storedProducts() {		
+		ModelAndView mv =new ModelAndView("product/storedProducts");
 		mv.addObject("product",productsDAO.getProducts());
-		return mv;		
+		return mv;	
 	}
+
 }
