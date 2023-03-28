@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import webquanao.DAO.CartsDAO;
 import webquanao.DAO.ProductsDAO;
 import webquanao.DAO.ProductsDetailsDAO;
 import webquanao.DAO.UsersDAO;
+import webquanao.DTO.CartsDTO;
 import webquanao.DTO.ProductsDTO;
 import webquanao.DTO.ProductsDetailsDTO;
 import webquanao.DTO.UsersDTO;
@@ -33,13 +35,14 @@ public class ProductController {
 	ProductsDAO productsDAO;
 	@Autowired
 	ProductsDetailsDAO productsDetailsDAO;
+	@Autowired
+	CartsDAO cartsDAO;
     private UsersDAO userDao;
 
     @Autowired
     public void setUserDao(UsersDAO userDao) {
         this.userDao = userDao;
     }
-
 	//Product
 	//Show san pham
 	@RequestMapping(value = {"/{productID}"})
@@ -179,4 +182,14 @@ public class ProductController {
         }
     }
     
+    //Product to Cart
+    //Add product to cart
+    @RequestMapping(value = "/{username}/addCart", method = RequestMethod.POST)
+    public String AddProductToCart(@ModelAttribute("cart") CartsDTO carts,
+    		@RequestParam String username)
+    		 {
+    		cartsDAO.create(carts);
+        	System.out.println("Thanh cong");
+            return "redirect:/user/{username}/cart";
+    }
 }

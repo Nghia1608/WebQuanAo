@@ -15,6 +15,7 @@ public class CartsBLL implements RowMapper<CartsDTO>{
 		carts.setProductDetailsID(rs.getString("productDetailsID"));
 		carts.setSoLuong(rs.getInt("soLuong"));
 		carts.setUsername(rs.getString("username"));
+		carts.setTongTien(rs.getInt("tongTien"));
 		return carts;
 	}
 }

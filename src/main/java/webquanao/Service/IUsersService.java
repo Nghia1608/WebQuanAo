@@ -2,6 +2,7 @@ package webquanao.Service;
 
 import java.util.List;
 
+import webquanao.DTO.CartsDTO;
 import webquanao.DTO.UsersDTO;
 
 public interface IUsersService {
@@ -12,5 +13,5 @@ public interface IUsersService {
 	void update(UsersDTO user);
 	void delete(String username);
 	
-	List<UsersDTO> findAll();			
+	List<UsersDTO> getUsers();		
 }

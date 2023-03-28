@@ -10,7 +10,10 @@
     <decorator name="product" page="layouts/product.jsp">
        <pattern>/product/*</pattern>
     </decorator>
-    <decorator name="user" page="layouts/user.jsp">
+    <decorator name="user" page="layouts/product.jsp">
+       <pattern>/user/*</pattern>
+    </decorator>
+    <decorator name="home" page="layouts/user.jsp">
     	<pattern>/home/*</pattern>
         <pattern>/*</pattern>
     </decorator>

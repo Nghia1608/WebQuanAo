@@ -49,9 +49,9 @@ public class AuthController {
     public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
         UsersDTO user = userDao.findByUsername(username);
         if (user != null && user.getPassword().equals(password)) {
-            session.setAttribute("user", user);
+        	session.setAttribute("user", user);
             System.out.println("thanh cong");
-            return "redirect:/admin";
+            return "redirect:/";
         } else {
         	System.out.println("that bai");
             return "auth/login";
@@ -73,6 +73,17 @@ public class AuthController {
         } else {
             userDao.create(user);
         	System.out.println("Thanh cong");
+            return "auth/login";
+        }
+    }
+    
+    @PostMapping("/logout")
+    public String logout(@RequestParam("user") String user, HttpSession session) {
+        if (user != null) {
+        	session.removeAttribute(user);
+            return "redirect:/";
+        } else {
+        	System.out.println("that bai");
             return "auth/login";
         }
     }

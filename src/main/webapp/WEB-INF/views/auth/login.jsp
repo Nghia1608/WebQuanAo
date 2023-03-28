@@ -36,7 +36,7 @@
 	<div class="container single_product_container">
     <div class="mt-4">
     <h3 >Đăng nhập</h3>
-         <form method="post" action ="${pageContext.request.contextPath}/auth/login";>
+         <form method="post" action ="${pageContext.request.contextPath}/auth/login">
 
          <div class="input-box">
             <span class="details">Username</span>

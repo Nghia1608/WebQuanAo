@@ -7,7 +7,7 @@
     <div class="super_container">
 	<div class="container single_product_container">
 
-        <form method="POST" action="/products/{{products._id}}?_method=POST">
+        <form method="POST" action="${pageContext.request.contextPath}/product/${user.username}/addCart/?_method=POST">
 
 		<br>
 		<div class="row">
@@ -101,7 +101,7 @@
 								}
 
 								document.getElementById(sizeIdSelected${item.size}).onclick = function(){
-
+									document.getElementById("idSP").value = "${item.productDetailsID }";
 									document.getElementById("soLuong").value = 1;
 
 									giaTienSizeDaChonTag.value = document.getElementById(ValueMoneySizeSelected${item.size}).value;
@@ -135,10 +135,8 @@
                 <h4 >Tổng tiền :  <h3 id="tongGiaTien" name="tongGiaTien"> </h3> </h4>
 			
             <input type="text" class="form-control" value="0" id="tongTien" name="tongTien" hidden>
-            <input type="text" class="form-control" value="${item.productID }" id="idSP" name="idSP" hidden>
-            <input type="text" class="form-control" value="{{products.tenSanPham}}" id="tenSanPham" name="tenSanPham" hidden>
-            <input type="text" class="form-control" value="{{products.image}}" id="image" name="image" hidden>
-
+            <input type="text" class="form-control" value="" id="idSP" name="productDetailsID" hidden>
+			<input type="text" class="form-control" value="${user.username }" name="username" hidden>
 			<button id="btn-add" type="submit" class="btnUpdate1 btn-link" disabled>Thêm vào giỏ hàng</button>
 
 			<script>
@@ -156,53 +154,6 @@
 		</div>
         </form>
 
-	</div>
-
-
-
-	<!-- Benefit -->
-
-	<div class="benefit">
-		<div class="container">
-			<div class="row benefit_row">
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Miễn Phí Giao Hàng</h6>
-							<p>Cho đơn hàng 300k trên</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Thanh toán</h6>
-							<p>Thanh toán khi nhận hàng hoặc thanh toán online</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Hoàn tiền</h6>
-							<p>Nếu sản phẩm bị lỗi do shop hoặc do vận chuyển</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>Từ T2 - CN</h6>
-							<p>8:00 AM - 10:00 PM</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 
 

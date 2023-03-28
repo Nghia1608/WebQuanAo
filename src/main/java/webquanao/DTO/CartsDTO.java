@@ -28,8 +28,16 @@ public class CartsDTO {
 	public void setProductDetailsID(String productDetailsID) {
 		this.productDetailsID = productDetailsID;
 	}
+	public int getTongTien() {
+		return tongTien;
+	}
+	public void setTongTien(int tongTien) {
+		this.tongTien = tongTien;
+	}
+	private int tongTien;
 	private String cartsID;
 	private int soLuong;
+
 	private String username;
 	private String productDetailsID;
 	
