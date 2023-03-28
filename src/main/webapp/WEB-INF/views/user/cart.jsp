@@ -28,7 +28,7 @@
             <th scope="col">STT</th>
             <th scope="col">Tên sản phẩm</th>
             <th scope="col">Hình ảnh</th>
-            <th scope="col">productDetailsID</th>
+            <th scope="col">Size</th>
             <th scope="col">Số lượng</th>
             <th scope="col">Giá tiền</th>
             <th scope="col" colspan="2">Chỉnh sửa</th>
@@ -49,14 +49,14 @@
                 </td>
             <th scope="row"></th>
             <td>
-<%--               <h4>${item.tenSanPham}  </h4> --%>
+              <h4>${item.tenSanPham}  </h4>
               
             </td>
             <td>
-                <img class="imageProduct"href="${pageContext.request.contextPath}/product/${item.productDetailsID}"  src="" alt="">
+                <img class="imageProduct"href="${pageContext.request.contextPath}/product/${item.productDetailsID}"  src="${item.image}" alt="">
               </td>
             <td>
-                <h4 class="productDetailsID"id="productDetailsID${item.cartsID}"name="productDetailsID" ></h4>
+                <h4 class="size"id="size${item.cartsID}"name="size" >${item.size}</h4>
             </td>
             <td>
             <input type="number" min="1" max="20"class="form-control" value="${item.soLuong}" id="soLuong${item.cartsID}" name="soLuong"placeholder="Chọn số lượng mua">
@@ -72,7 +72,7 @@
 
 <%--                         <input type="text" class="form-control" value="${item.tenSanPham}" id="tenSP${item.cartsID}" name="tenSanPham" hidden> --%>
 
-<%--                         <input type="text" class="form-control" value="${item.productDetailsID}" id="productDetailsIDForSubmit${item.cartsID}"name="productDetailsID" hidden> --%>
+                        <input type="text" class="form-control" value="${item.size}" id="productDetailsIDForSubmit${item.cartsID}"name="size" hidden>
                         <input type="text" class="form-control" value="${item.tongTien}" id="tongTien${item.cartsID}" name="giaTienBanRa" hidden>
                         <input type="text" class="form-control" value="${item.tongTien}" id="tongTienForUpdate${item.cartsID}" name="tongTienForUpdate${item.cartsID}" hidden>
                         <input type="text" class="form-control" value="" id="tongTienGioHang" hidden>
@@ -83,25 +83,25 @@
     document.addEventListener('DOMContentLoaded',function(){
 
   //get ID
-    var tempID = "${item.cartsID}"   //lay id la khong chay//tongTien moi chay
-     tongGiaTien1${item.cartsID} = "tongGiaTien"+${tempID}
-     tongTien1${item.cartsID} = "tongTien"+${tempID}
-     soLuong1${item.cartsID} = "soLuong"+${tempID}
+
+     tongGiaTien1${item.cartsID} = "tongGiaTien${item.cartsID}"
+     tongTien1${item.cartsID} = "tongTien${item.cartsID}"
+     soLuong1${item.cartsID} = "soLuong${item.cartsID}"
      //
-     tongTienForUpdate${item.cartsID} = "tongTienForUpdate"+${tempID}
-     soLuongForUpdate${item.cartsID} = "soLuongForUpdate"+${tempID}
+     tongTienForUpdate${item.cartsID} = "tongTienForUpdate${item.cartsID}"
+     soLuongForUpdate${item.cartsID} = "soLuongForUpdate${item.cartsID}"
      //
-     tenSanPham${item.cartsID} ="tenSP"+${tempID}
-     productDetailsIDForSubmit${item.cartsID} = "productDetailsIDForSubmit"+${tempID}
-     productDetailsID${item.cartsID} ="productDetailsID"+${tempID}
-     checked${item.cartsID} ="checked"+${tempID}
+     tenSanPham${item.cartsID} ="tenSP${item.cartsID}"
+     productDetailsIDForSubmit${item.cartsID} = "productDetailsIDForSubmit${item.cartsID}"
+     productDetailsID${item.cartsID} ="productDetailsID${item.cartsID}"
+     checked${item.cartsID} ="checked${item.cartsID}"
 //  
   var number = ${item.tongTien}
     var giaTienSanPham${item.cartsID} = (document.getElementById(tongTien1${item.cartsID}).value / document.getElementById(soLuong1${item.cartsID}).value)
     var number = document.getElementById(tongTien1${item.cartsID}).value
     var valueproductDetailsID = document.getElementById(productDetailsIDForSubmit${item.cartsID}).value
 
-    document.getElementById(productDetailsID${item.cartsID}).innerHTML = valueproductDetailsID.toLocaleString() + "  g";     
+//     document.getElementById(productDetailsID${item.cartsID}).innerHTML = valueproductDetailsID.toLocaleString() + "  g";     
     document.getElementById(tongGiaTien1${item.cartsID}).innerHTML = number.toLocaleString() + "  VND";
         var soLuongDaChon = document.getElementById(soLuong1${item.cartsID}).value 
         document.getElementById(tongGiaTien1${item.cartsID}).innerHTML =(giaTienSanPham${item.cartsID}*soLuongDaChon).toLocaleString() +"  VND";
@@ -115,9 +115,6 @@
         document.getElementById(tongTien1${item.cartsID}).value = (giaTienSanPham${item.cartsID}*soLuongDaChon);
         document.getElementById(tongTienForUpdate${item.cartsID}).value = (giaTienSanPham${item.cartsID}*soLuongDaChon);
 
-        var max = document.getElementById(AmoutOfproductDetailsIDSelected${item.productDetailsID}).value;
-        var input = document.getElementById("soLuong");
-        input.setAttribute("max",max); // set a new value;
     }
   //checkboxxxxxx
         var checkboxAll = $('#checkboxAll');
@@ -126,7 +123,7 @@
         var itemForListSP = "";
             //checkbox all change
           checkboxAll.change(function(req,res,next){
-          var isCheckedAll = $(item).prop('checked');
+          var isCheckedAll = $(this).prop('checked');
           productsItemCheckbox.prop('checked',isCheckedAll);
           //
 
@@ -146,7 +143,7 @@
             document.getElementById("tongSanPhamToSubmit").value = tongSanPhamToShowDaChon1;
             //add tab HTML vao itemForListSP
            //itemForListSP + document.getElementById(tenSanPham${item.cartsID}).value
-            console.log(document.getElementById(tenSanPham${item.cartsID}).value)
+
 
           }
           else{
@@ -174,12 +171,12 @@
           checkboxAll.prop('checked',isCheckedAll);
         })
  
-          var idCheckboxItem = $("input[id='checkbox" + ${tempID} + "']");
+          var idCheckboxItem = $("input[id='checkbox" + "${item.cartsID}" + "']");
           idCheckboxItem.change(function(){
           tempTongTienGioHang1 = 0;
           tongSanPhamToShowDaChon1 = 0;
 
-          checkboxItemID = document.getElementById("checkbox"+${tempID}).checked;
+          checkboxItemID = document.getElementById("checkbox${item.cartsID}").checked;
 
             if(checkboxItemID){
               tempTongTienGioHang = tempTongTienGioHang + parseInt(number);
@@ -220,9 +217,6 @@
         
 
     </table>
-
-  </div>
-
 <div class="form-check">
   <input class="form-check-input" type="checkbox" value="" id="checkboxAll">
   <label class="form-check-label" for="checkboxAll">
@@ -233,10 +227,15 @@
     <h4 class="tongTienGioHang"id="tongSanPhamToShow"> Tổng số sản phẩm :  </h4>
 
     <h4 class="tongTienGioHangText"id="tongTienGioHangText" name="tongTienGioHangText" > Tổng tiền :  </h4>
+    <button id="btnDatHang" type="button" class="btn btn-success" disabled> Đặt hàng</button>
+    
+  </div>
+
+
 
 
     
-<button id="btnDatHang" type="button" class="btn btn-success" disabled> Đặt hàng</button>
+
 
 <script>
   document.getElementById("btnDatHang").onclick = function(){

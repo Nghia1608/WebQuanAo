@@ -19,9 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import webquanao.DAO.CartsDAO;
-import webquanao.DAO.UsersDAO;
-import webquanao.DTO.UsersDTO;
+
+import webquanao.DAO.*;
+import webquanao.DTO.*;
+
 
 
 @Controller
@@ -29,7 +30,8 @@ import webquanao.DTO.UsersDTO;
 public class UserController {
     private UsersDAO userDao;
     private CartsDAO cartsDao;
-
+    private ProductsDetailsDAO productsDetailsDao;
+    private ProductsDAO productsDao;
     @Autowired
     public void setUserDao(UsersDAO userDao) {
         this.userDao = userDao;
@@ -37,6 +39,14 @@ public class UserController {
     @Autowired
     public void setCartsDao(CartsDAO cartsDao) {
         this.cartsDao = cartsDao;
+    }
+    @Autowired
+    public void setProductsDetaisDao(ProductsDetailsDAO productsDetailsDao) {
+        this.productsDetailsDao = productsDetailsDao;
+    }
+    @Autowired
+    public void setProductsDao(ProductsDAO productsDao) {
+        this.productsDao = productsDao;
     }
 	//Danh sach user
 	@RequestMapping("/storedUsers")
@@ -90,3 +100,4 @@ public class UserController {
 	}
 
 }
+

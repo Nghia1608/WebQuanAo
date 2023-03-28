@@ -7,7 +7,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import webquanao.BLL.CartsBLL;
+import webquanao.BLL.ProductsDetailsBLL;
 import webquanao.DTO.CartsDTO;
+import webquanao.DTO.ProductsDetailsDTO;
 import webquanao.Service.ICartsService;
 @Repository
 public class CartsDAO implements ICartsService{
@@ -17,7 +19,10 @@ public class CartsDAO implements ICartsService{
 	//Get Cart by username
 	@Override
 	public List<CartsDTO> GetCarts(String username){
-		String sql = "SELECT * FROM carts WHERE username = ?";
+		String sql = "SELECT DISTINCT c.cartsID,p.tenSanPham,p.image,pd.size,c.soLuong,c.tongTien,c.productDetailsID,c.username\r\n"
+				+ "FROM carts c,product p ,productdetails pd\r\n"
+				+ "WHERE c.username = ? AND c.productDetailsID = pd.productDetailsID AND p.productID=pd.productID\r\n"
+				+ "GROUP BY c.cartsID,p.tenSanPham,p.image,pd.size,c.soLuong,c.tongTien";
         List<CartsDTO> carts =  jdbcTemplate.query(sql, new Object[]{username}, new CartsBLL());
 		return carts;
 	}
@@ -45,5 +50,6 @@ public class CartsDAO implements ICartsService{
  	       return (uuid.toString()).replace("-", "");
  	   }
  	}
+
 
 }

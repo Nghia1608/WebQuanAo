@@ -34,11 +34,36 @@ public class CartsDTO {
 	public void setTongTien(int tongTien) {
 		this.tongTien = tongTien;
 	}
+    public void setProductDetails(ProductsDetailsDTO productDetail) {
+        this.productDetail = productDetail;
+    }
 	private int tongTien;
 	private String cartsID;
 	private int soLuong;
 
 	private String username;
+	public String getTenSanPham() {
+		return tenSanPham;
+	}
+	public void setTenSanPham(String tenSanPham) {
+		this.tenSanPham = tenSanPham;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	private String tenSanPham;
+	private String image;
 	private String productDetailsID;
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
+	}
+	private String size;
+	private ProductsDetailsDTO productDetail;
 	
 }
