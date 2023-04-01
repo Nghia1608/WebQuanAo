@@ -25,7 +25,7 @@ public class UsersDAO implements IUsersService{
 	@Override
 	public List<UsersDTO> getUsers(){
 		List<UsersDTO> list = new ArrayList<UsersDTO>();
-		String sql = "SELECT * FROM users";
+		String sql = "SELECT username,hoTen,diaChi,trangThai,password,email,sdt,quyen FROM users";
 		list = jdbcTemplate.query(sql,new UsersBLL());
 		return list;
 	}

@@ -59,8 +59,6 @@
          </div>
          <script>
          document.getElementById("login").onclick = function(){
-            var username = document.getElementById("username").value;
-         //   sessionStorage.setItem("username",username)
 
             document.getElementById("formCheckout").hidden = false;
          }

@@ -11,5 +11,9 @@ public interface ICartsService {
 	void update(CartsDTO carts);
 	void delete(String cartsID);
 
-	List<CartsDTO> GetCarts(String username);		
+	List<CartsDTO> GetCarts(String username);
+	CartsDTO checkProductInCart(String username,String productdetails);		
+	void updateCartWhenAddProduct(String username,String productDetailsID,int soLuong,int tongTien);	
+	void updateCartInCartPage(String cartsID,int soLuong,int tongTien);
+	CartsDTO getCartsByID(String cartsID);
 }

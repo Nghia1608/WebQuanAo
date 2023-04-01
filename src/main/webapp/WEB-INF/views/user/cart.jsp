@@ -37,7 +37,7 @@
         <tbody>
   <input type="text" class="form-control" value="" id="tongTienGioHang" name="tongTienGioHang" hidden>
   <input type="text" class="form-control" value="" id="tongSanPhamToSubmit" name="tongSanPham" hidden>
-            
+            			<input type="text" class="form-control" value="${user.username }" name="username" hidden>
 		<c:forEach var="item" items="${carts}" varStatus="index">
 
             <tr>
@@ -388,17 +388,17 @@
         });
 
         btnRestore.onclick = function(){
-            restoreForm.action = '/products/'+idRestore + '/updateCart?_method=PUT';
+            restoreForm.action = '${pageContext.request.contextPath}/product/'+idRestore + '/updateCart?_method=POST';
             restoreForm.submit(); 
 
         }
         btnDelete.onclick = function(){
-            deleteForm.action = '/products/'+idDelete + '/deleteCart?_method=DELETE';
+            deleteForm.action = '${pageContext.request.contextPath}/product/'+idDelete + '/deleteCart?_method=DELETE';
             deleteForm.submit();
         }
 
           btnOrder.onclick = function(){
-          orderForm.action = '/products/order?_method=POST';
+          orderForm.action = '${pageContext.request.contextPath}/product/order?_method=POST';
           orderForm.submit();
         }
 

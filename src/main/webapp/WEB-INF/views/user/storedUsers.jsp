@@ -17,8 +17,8 @@
         <thead>
             <tr>
             <th scope="col">STT</th>
-            <th scope="col">Username</th>
             <th scope="col">Họ tên</th>
+            <th scope="col">Địa chỉ</th>
             <th scope="col">Quyền</th>
             <th scope="col" colspan="2">Tình trạng</th>
             </tr>
@@ -35,10 +35,10 @@
             <th scope="row"></th>
             <td>${item.username}</td>
             <td>${item.hoTen}</td>
-            <td>${item.quyen}</td>
+            <td>${item.diaChi}</td>
             <td>${item.trangThai}</td>
             <td>
-                <a href="${pageContext.request.contextPath}/user/${item.username}/editUsers" class="btnUpdate btn-link">Sửa</a>
+                <a href="${pageContext.request.contextPath}/user/'${item.username}'/editUsers" class="btnUpdate btn-link">Sửa</a>
     	        <input type="submit"class="btnDelete btn-link" type="submit" value="Xóa">
             </td>
             </tr>

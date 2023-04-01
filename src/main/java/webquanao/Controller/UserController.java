@@ -50,7 +50,7 @@ public class UserController {
     }
 	//Danh sach user
 	@RequestMapping("/storedUsers")
-	public ModelAndView storedUsers() {		
+	public ModelAndView ListUsers() {		
 		ModelAndView mv =new ModelAndView("user/storedUsers");
 		mv.addObject("user",userDao.getUsers());
 		return mv;	

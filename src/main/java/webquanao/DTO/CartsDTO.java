@@ -65,5 +65,22 @@ public class CartsDTO {
 	}
 	private String size;
 	private ProductsDetailsDTO productDetail;
-	
+    private int soLuongForUpdate;
+    private int tongTienForUpdate;
+
+    public int getSoLuongForUpdate() {
+        return soLuongForUpdate;
+    }
+
+    public void setSoLuongForUpdate(int soLuongForUpdate) {
+        this.soLuongForUpdate = soLuongForUpdate;
+    }
+
+    public int getTongTienForUpdate() {
+        return tongTienForUpdate;
+    }
+
+    public void setTongTienForUpdate(int tongTienForUpdate) {
+        this.tongTienForUpdate = tongTienForUpdate;
+    }
 }

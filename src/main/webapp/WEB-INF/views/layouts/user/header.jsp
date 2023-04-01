@@ -30,18 +30,12 @@
 										
 										<form name="logoutForm" method="POST">
 										<li hidden id="logOut">
-											<a id="logout"href="#"><i class="fa fa-user-plus" aria-hidden="true">
+											<a id="logout"href="${pageContext.request.contextPath}/auth/logout"><i class="fa fa-user-plus" aria-hidden="true">
 											</i>Đăng xuất</a>
 										</li>
 										<input type="text" class="form-control" value="${user.username}" id="showUsername" hidden>
 										<input type="text" class="form-control" value="${user}" id="user" name="user" hidden>
-										<script>
-											document.getElementById("logout").onclick = function(){
-													var logoutForm = document.forms['logoutForm'];
-													logoutForm.action = "${pageContext.request.contextPath}/auth/logout?_method=POST";
-													logoutForm.submit();
-											}
-										</script>
+
 										<script>
 											document.getElementById("login").hidden =false;
 											if(document.getElementById("showUsername").value){

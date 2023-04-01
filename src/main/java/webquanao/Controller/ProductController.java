@@ -1,6 +1,7 @@
 package webquanao.Controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,14 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import webquanao.DAO.CartsDAO;
-import webquanao.DAO.ProductsDAO;
-import webquanao.DAO.ProductsDetailsDAO;
-import webquanao.DAO.UsersDAO;
-import webquanao.DTO.CartsDTO;
-import webquanao.DTO.ProductsDTO;
-import webquanao.DTO.ProductsDetailsDTO;
-import webquanao.DTO.UsersDTO;
+import webquanao.DAO.*;
+
+import webquanao.DTO.*;
 
 @Controller
 @RequestMapping("/product")
@@ -35,6 +31,10 @@ public class ProductController {
 	ProductsDAO productsDAO;
 	@Autowired
 	ProductsDetailsDAO productsDetailsDAO;
+	@Autowired
+	UsersOrdersDAO usersOrdersDAO;
+	@Autowired
+	UsersOrdersDetailsDAO usersOrdersDetailsDAO;
 	@Autowired
 	CartsDAO cartsDAO;
     private UsersDAO userDao;
@@ -186,10 +186,62 @@ public class ProductController {
     //Add product to cart
     @RequestMapping(value = "/{username}/addCart", method = RequestMethod.POST)
     public String AddProductToCart(@ModelAttribute("cart") CartsDTO carts,
-    		@RequestParam String username)
+    		
+    		@RequestParam String username,@RequestParam String productDetailsID,@RequestParam int soLuong
+    		,@RequestParam int tongTien)
     		 {
+    	CartsDTO productExitsInCart = cartsDAO.checkProductInCart(username,productDetailsID);
+    	if(productExitsInCart!=null) {
+    		cartsDAO.updateCartWhenAddProduct(username,productDetailsID,soLuong,tongTien);
+        	System.out.println("Thanh cong");
+            return "redirect:/user/{username}/cart";
+    	}
+    	else {
     		cartsDAO.create(carts);
         	System.out.println("Thanh cong");
             return "redirect:/user/{username}/cart";
+    	}
+    }
+    //UPdate so luong - tong tien in cart
+    @RequestMapping(value = "/{cartsID}/updateCart", method = RequestMethod.POST)
+    public String UpdateProductToCart(@ModelAttribute("cart") CartsDTO carts,
+            @PathVariable("cartsID") String cartsID,
+            @RequestParam Map<String, String> params
+            ) {
+
+        int newSoLuongForUpdate = Integer.parseInt(params.get("soLuongForUpdate"+cartsID));
+        int newTongTienForUpdate = Integer.parseInt(params.get("tongTienForUpdate" + cartsID));
+        String newUsername = params.get("username");
+        carts.setUsername(newUsername);
+        carts.setSoLuongForUpdate(newSoLuongForUpdate);
+        carts.setTongTienForUpdate(newTongTienForUpdate);
+        
+		cartsDAO.updateCartInCartPage(cartsID,newSoLuongForUpdate,newTongTienForUpdate);
+        
+        return "redirect:/user/{newUsername}/cart";
+    }
+
+    
+    //Product to Order
+    //Add product to order and order detail
+    @RequestMapping(value = "/{username}/addOrder", method = RequestMethod.POST)
+    public String AddProductToCart(
+    		@ModelAttribute("cart") CartsDTO carts,
+    		@ModelAttribute("usersorders") UsersOrdersDTO usersorders,
+    		@ModelAttribute("usersordersdetails") UsersOrdersDetailsDTO usersordersdetails,
+    		//
+    		@RequestParam String username,
+    		@RequestParam String productDetailsID,
+    		@RequestParam String cartsID,
+    		@RequestParam int soLuong,
+    		@RequestParam int tongTien) {
+	    		
+    			usersOrdersDAO.create(usersorders);
+    			usersOrdersDetailsDAO.create(usersordersdetails);
+    			
+    			cartsDAO.delete(cartsID);
+	    		 
+	
+	            return "redirect:/user/{username}/order";
     }
 }
