@@ -14,6 +14,6 @@ public interface IUsersOrders {
 
 	void createOrder(String username,String diaChi,String note,String hinhThucMuaHang,
 			String tinhTrang,int tongTien,String maHoaDon,Timestamp thoiGianDatHang,Timestamp thoiGianGiaoDuKien);
-	List<UsersOrdersDTO> getUsersOrdersByMaHoaDon(String maHoaDon);
+	UsersOrdersDTO getUsersOrdersByMaHoaDon(String maHoaDon);
 	
 }

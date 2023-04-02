@@ -18,14 +18,14 @@
 
         <div class="row">
           <div id="formUser" class="col-50">
-            <label for="hoTen"><i class="fa fa-user"></i> Họ tên :<i>${orders.hoTen}</label>
-            <label for="email"><i class="fa fa-envelope"></i> Email :<i>${orders.email}</label>
-            <label for="diaChi"><i class="fa fa-address-card-o"></i> Địa chỉ nhận hàng :  <i>${orders.diaChi}</i></label>
-            <label for="sdt"><i class="fa fa fa-phone"></i> Số điện thoại :<i>${orders.sdt}</label>
+            <label for="hoTen"><i class="fa fa-user"></i> Họ tên :<i>${user.hoTen}</label>
+            <label for="email"><i class="fa fa-envelope"></i> Email :<i>${user.email}</label>
+            <label for="diaChi"><i class="fa fas fa-bookmark"></i> Địa chỉ nhận hàng :  <i>${orders.diaChi}</i></label>
+            <label for="sdt"><i class="fa fa fa-phone"></i> Số điện thoại :<i>${user.sdt}</label>
             <label for="adr"><i class="fa fas fa-bookmark"></i> Ghi chú :<i>${orders.note}</label>
           </div>
-            <label for="adr"><i class="fa fas fa-bookmark"></i>Tổng tiền :<i>${orders.tongTien}</label>
         </div>
+        <h4 id="tongTienHoaDon"><i class="fa fas fa-bookmark"></i></h4>
 
     </div>
 
@@ -46,12 +46,12 @@
         <tbody>
 		<c:forEach var="item" items="${ordersDetails}" varStatus="index">
             <tr>
-            <th scope="row"></th>
+            <th scope="row">${index.index + 1}</th>
             <td>
                 <h5 >${item.tenSanPham}</h5>
             </td>
             <td>
-                <h5 class="size"id="size${item.giaTienBanRa}">${item.size}</h5>
+                <h5 class="size"id="size">${item.size}</h5>
                 </td>
             <td>
             <h5  >${item.soLuong}</h5>
@@ -65,6 +65,7 @@
                 //soluong
 
                 //giatien
+                document.getElementById("tongTienHoaDon").innerHTML ="Tổng tiền : "+ (${orders.tongTien}).toLocaleString() + "  VND"; 
                     var giaTienBanRaHienThi${item.giaTienBanRa} = "giaTienBanRa${item.giaTienBanRa}"
                     document.getElementById(giaTienBanRaHienThi${item.giaTienBanRa}).innerHTML = (${item.giaTienBanRa}).toLocaleString() + "  VND";     
                 </script>

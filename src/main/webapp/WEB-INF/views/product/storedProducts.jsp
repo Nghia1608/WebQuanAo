@@ -31,7 +31,7 @@
 			
 			<input type="hidden" name="productID" value="${item.productID}">
             <tr>
-            <th scope="row"></th>
+            <th scope="row">${index.index + 1}</th>
             <td>${item.tenSanPham}</td>
             <td>${item.maLoai}</td>
             <td>${item.tinhTrang}</td>

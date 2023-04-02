@@ -75,11 +75,11 @@ public class UserController {
         UsersDTO UserExist = userDao.findByUsername(username);
         if (UserExist==null) {
             System.out.println("user k tồn tại");
-            return "redirect:/user/storedUsers";
+            return "redirect:/";
         } else {
         	userDao.update(user);
         	System.out.println("Thanh cong");
-            return "redirect:/user/storedUsers";
+            return "redirect:/";
         }
     }
 	//Xoa user

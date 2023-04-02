@@ -32,7 +32,7 @@
    			<form id="delete-product-form" action="${pageContext.request.contextPath}/user/${item.username}/deleteUser" method="POST">
    			<input type="hidden" name="username" value="${item.username}">
             <tr>
-            <th scope="row"></th>
+            <th scope="row">${index.index + 1}</th>
             <td>${item.username}</td>
             <td>${item.hoTen}</td>
             <td>${item.diaChi}</td>

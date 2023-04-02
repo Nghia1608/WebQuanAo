@@ -31,7 +31,7 @@
 		<c:forEach var="item" items="${orders}" varStatus="index">
 
             <tr>
-            <th scope="row"></th>
+            <th scope="row">${index.index + 1}</th>
             <td>
               <h5>${item.hinhThucMuaHang}  </h5>
             </td>
@@ -49,19 +49,16 @@
             </td>
             <td>
                 <a href="${pageContext.request.contextPath}/user/${item.maHoaDon}/orderDetail" class="btnUpdate btn-link">Chi tiết</a>
-				<a id="btn-select${item.maHoaDon}"href="" class="btnDelete btn-link" data-id="${item.maHoaDon}" data-toggle="modal" data-target="#exampleModalRestore" hidden>Hủy đơn hàng</a>
+				
 
 			</td>
             </tr>
             <script>
-
-                var tempID${item.maHoaDon} = "createdAt${item.maHoaDon}"
-                var tempDate${item.maHoaDon} = document.getElementById(tempID${item.maHoaDon}).innerHTML
-				var tempBtnHuy${item.maHoaDon} ="btn-select${item.maHoaDon}"
-
 					var giaTienBanRaHienThi${item.maHoaDon} = "giaTienBanRa${item.maHoaDon}"
                     document.getElementById(giaTienBanRaHienThi${item.maHoaDon}).innerHTML = (${item.tongTien}).toLocaleString() + "  VND"; 
-                </script>
+					
+
+             </script>
             </c:forEach>
 
         </tbody>

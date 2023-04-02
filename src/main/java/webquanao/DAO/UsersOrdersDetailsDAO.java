@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import webquanao.BLL.CartsBLL;
 import webquanao.BLL.UsersOrdersDetailsBLL;
+import webquanao.DTO.CartsDTO;
 import webquanao.DTO.UsersOrdersDetailsDTO;
 import webquanao.Service.IUsersOrdersDetails;
 
@@ -18,14 +20,20 @@ public class UsersOrdersDetailsDAO implements IUsersOrdersDetails{
 	//Get All
 	@Override
 	public List<UsersOrdersDetailsDTO> getUsersOrdersDetails(String maHoaDon){
-		List<UsersOrdersDetailsDTO> list = new ArrayList<UsersOrdersDetailsDTO>();
-//		String sql = "SELECT * FROM usersordersdetails WHERE maHoaDon= ?";
-		String sql = "SELECT DISTINCT p.tenSanPham,pd.size,pd.giaTienBanRa,uod.soLuong\r\n"
+//		String sql = "SELECT DISTINCT p.tenSanPham,pd.size,pd.giaTienBanRa,uod.soLuong,uod.usersordersdetailsID,uod.productDetailsID,uod.maHoaDon\r\n"
+//				+ "FROM product p,productdetails pd,usersordersdetails uod\r\n"
+//				+ "WHERE uod.maHoaDon = ? AND p.productID = pd.productID AND pd.productDetailsID = uod.productDetailsID\r\n"
+//				+ "GROUP BY p.tenSanPham,pd.size,pd.giaTienBanRa,uod.soLuong,uod.usersordersdetailsID,uod.productDetailsID";
+//		List<UsersOrdersDetailsDTO> list = jdbcTemplate.query(sql, new Object[]{maHoaDon}, new UsersOrdersDetailsBLL());
+//		list = jdbcTemplate.query(sql,new UsersOrdersDetailsBLL());
+//		return list;
+		String sql = "SELECT DISTINCT p.tenSanPham,pd.size,pd.giaTienBanRa,uod.soLuong,uod.usersordersdetailsID,uod.productDetailsID,uod.maHoaDon\r\n"
 				+ "FROM product p,productdetails pd,usersordersdetails uod\r\n"
 				+ "WHERE uod.maHoaDon = ? AND p.productID = pd.productID AND pd.productDetailsID = uod.productDetailsID\r\n"
-				+ "GROUP BY p.tenSanPham,pd.size,pd.giaTienBanRa,uod.soLuong";
-		list = jdbcTemplate.query(sql,new UsersOrdersDetailsBLL());
-		return list;
+				+ "GROUP BY p.tenSanPham,pd.size,pd.giaTienBanRa,uod.soLuong,uod.usersordersdetailsID,uod.productDetailsID";
+			List<UsersOrdersDetailsDTO> list = jdbcTemplate.query(sql, new Object[]{maHoaDon}, new UsersOrdersDetailsBLL());
+			return list;
+
 	}
 
     //Create new

@@ -244,8 +244,9 @@ public class ProductController {
     		@ModelAttribute("cart") CartsDTO carts,
     		@ModelAttribute("usersorders") UsersOrdersDTO usersorders,
     		@ModelAttribute("usersordersdetails") UsersOrdersDetailsDTO usersordersdetails,
+    		@ModelAttribute("username") String username,
     		//
-    		@RequestParam String username,
+//    		@RequestParam String username,
     		@RequestParam String diaChi,
     		@RequestParam String note,
     		@RequestParam String hinhThucMuaHang,

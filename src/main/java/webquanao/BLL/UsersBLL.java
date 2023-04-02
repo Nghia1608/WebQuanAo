@@ -13,7 +13,7 @@ public class UsersBLL implements RowMapper<UsersDTO>{
 	public UsersDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		// TODO Auto-generated method stub
 		UsersDTO Users = new UsersDTO();
-		Users.setUsername(rs.getNString("username"));
+		Users.setUsername(rs.getString("username"));
 		Users.setPassword(rs.getString("password"));
 		Users.setEmail(rs.getString("email"));
 		Users.setHoTen(rs.getNString("hoTen"));

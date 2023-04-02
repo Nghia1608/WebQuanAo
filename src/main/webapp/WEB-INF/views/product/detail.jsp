@@ -35,7 +35,7 @@
 							</c:if>
 			<input type="hidden" name="productDetailsID" value="${item.productDetailsID}">
             <tr>
-            <th scope="row"></th>
+            <th scope="row">${index.index + 1}</th>
             <td>
                 <h5 class="size"id="size${item.giaTienBanRa}" name="size${item.giaTienBanRa}" >${item.size}</h5>
             </td>

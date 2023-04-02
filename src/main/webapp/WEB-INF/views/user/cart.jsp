@@ -59,7 +59,7 @@
 
                   </div>
                 </td>
-            <th scope="row"></th>
+            <th scope="row">${index.index + 1}</th>
             <td>
               <h4>${item.tenSanPham}  </h4>
               

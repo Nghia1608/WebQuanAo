@@ -11,10 +11,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import webquanao.BLL.ProductsBLL;
 import webquanao.BLL.ProductsDetailsBLL;
 import webquanao.BLL.UsersOrdersBLL;
 import webquanao.DAO.CartsDAO.RandomIDGenerator;
 import webquanao.DTO.CartsDTO;
+import webquanao.DTO.ProductsDTO;
 import webquanao.DTO.ProductsDetailsDTO;
 import webquanao.DTO.UsersOrdersDTO;
 import webquanao.Service.IUsersOrders;
@@ -40,11 +42,13 @@ public class UsersOrdersDAO implements IUsersOrders{
     }
 	//Get by maHoaDon
     @Override
-    public List<UsersOrdersDTO> getUsersOrdersByMaHoaDon(String maHoaDon) {
+    public UsersOrdersDTO getUsersOrdersByMaHoaDon(String maHoaDon) {
         String sql = "SELECT * FROM usersorders WHERE maHoaDon = ?";
         List<UsersOrdersDTO> orders = jdbcTemplate.query(sql, new Object[]{maHoaDon}, new UsersOrdersBLL());
-		return orders;
+		return orders.isEmpty() ? null : orders.get(0);
     }
+
+
     //Create new
     @Override
     public void createOrder(String username,String diaChi,String note,String hinhThucMuaHang,
