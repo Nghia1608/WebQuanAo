@@ -35,6 +35,18 @@
             </tr>
         </thead>
         <tbody>
+          <input type="text" class="form-control" value="" id="maHoaDon" name="maHoaDon" hidden>
+    <script>
+    function uuidv4() {
+    	  const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    	    const r = Math.random() * 16 | 0;
+    	    const v = c == 'x' ? r : (r & 0x3 | 0x8);
+    	    return v.toString(16);
+    	  });
+    	  return uuid.replace(/-/g, '');
+    	}
+    document.getElementById("maHoaDon").value = uuidv4();
+  </script>
   <input type="text" class="form-control" value="" id="tongTienGioHang" name="tongTienGioHang" hidden>
   <input type="text" class="form-control" value="" id="tongSanPhamToSubmit" name="tongSanPham" hidden>
             			<input type="text" class="form-control" value="${user.username }" name="username" hidden>
@@ -77,6 +89,7 @@
                         <input type="text" class="form-control" value="${item.tongTien}" id="tongTienForUpdate${item.cartsID}" name="tongTienForUpdate${item.cartsID}" hidden>
                         <input type="text" class="form-control" value="" id="tongTienGioHang" hidden>
                         <input type="text" class="form-control" value="false" id="checked${item.cartsID}" name="checked" hidden>
+                        <input type="text" class="form-control" value="${item.cartsID}" id="cartsID" name="cartsID" hidden>
 
             </tr>
 <script >
@@ -270,7 +283,6 @@
             <label for="adr"><i class="fa fa-address-card-o"></i> Ghi chú</label>
             <input type="text"class="textUser" id="note" name="note" placeholder="Ghi chú nếu có">
           </div>
-            <input type="text" id="username" name="username" value="${user.username}" hidden>
             <input type="text" id="hinhThucMuaHang" name="hinhThucMuaHang" value="online" hidden>
             <input type="text" id="tinhTrang" name="tinhTrang" value="Đã xác nhận đơn hàng" hidden>
 
@@ -398,7 +410,7 @@
         }
 
           btnOrder.onclick = function(){
-          orderForm.action = '${pageContext.request.contextPath}/product/order?_method=POST';
+          orderForm.action = '${pageContext.request.contextPath}/product/addOrder?_method=POST';
           orderForm.submit();
         }
 

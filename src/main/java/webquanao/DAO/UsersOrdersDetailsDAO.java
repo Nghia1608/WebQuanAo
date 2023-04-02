@@ -19,16 +19,20 @@ public class UsersOrdersDetailsDAO implements IUsersOrdersDetails{
 	@Override
 	public List<UsersOrdersDetailsDTO> getUsersOrdersDetails(String maHoaDon){
 		List<UsersOrdersDetailsDTO> list = new ArrayList<UsersOrdersDetailsDTO>();
-		String sql = "SELECT * FROM usersordersdetails WHERE maHoaDon= ?";
+//		String sql = "SELECT * FROM usersordersdetails WHERE maHoaDon= ?";
+		String sql = "SELECT DISTINCT p.tenSanPham,pd.size,pd.giaTienBanRa,uod.soLuong\r\n"
+				+ "FROM product p,productdetails pd,usersordersdetails uod\r\n"
+				+ "WHERE uod.maHoaDon = ? AND p.productID = pd.productID AND pd.productDetailsID = uod.productDetailsID\r\n"
+				+ "GROUP BY p.tenSanPham,pd.size,pd.giaTienBanRa,uod.soLuong";
 		list = jdbcTemplate.query(sql,new UsersOrdersDetailsBLL());
 		return list;
 	}
 
     //Create new
     @Override
-    public void create(UsersOrdersDetailsDTO ordersDetails) {
+    public void create(String usersordersdetailsID,String productDetailsID,int soLuong,String maHoaDon) {
         String sql = "INSERT INTO usersordersdetails (usersordersdetailsID,productDetailsID,soLuong,maHoaDon) VALUES(?,?,?,?)";
-        jdbcTemplate.update(sql, ordersDetails.getUsersordersdetailsID(),ordersDetails.getProductDetailsID(),ordersDetails.getSoLuong(),ordersDetails.getMaHoaDon());
+        jdbcTemplate.update(sql, usersordersdetailsID,productDetailsID,soLuong,maHoaDon);
     }
     //Update
     @Override

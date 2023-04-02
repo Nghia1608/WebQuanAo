@@ -28,10 +28,15 @@ import webquanao.DTO.*;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+	@Autowired
+	UsersOrdersDAO usersOrdersDAO;
+	@Autowired
+	UsersOrdersDetailsDAO usersOrdersDetailsDAO;
     private UsersDAO userDao;
     private CartsDAO cartsDao;
     private ProductsDetailsDAO productsDetailsDao;
     private ProductsDAO productsDao;
+    
     @Autowired
     public void setUserDao(UsersDAO userDao) {
         this.userDao = userDao;
@@ -97,6 +102,24 @@ public class UserController {
 		ModelAndView mv =new ModelAndView("user/cart");
 		mv.addObject("carts",cartsDao.GetCarts(username));
 		return mv;	
+	}
+	//Show order by user
+	@RequestMapping(value = {"/{username}/order"})
+	public ModelAndView ProductDetailList(@PathVariable String username) {	
+		
+		ModelAndView mv =new ModelAndView("user/order");
+		mv.addObject("orders",usersOrdersDAO.getUsersOrders(username));
+		return mv;		
+	}
+
+	//Show order detail by user
+	@RequestMapping(value = {"/{maHoaDon}/orderDetail"})
+	public ModelAndView OrderDetail(@PathVariable String maHoaDon) {	
+		
+		ModelAndView mv =new ModelAndView("user/orderDetail");
+		mv.addObject("orders",usersOrdersDAO.getUsersOrdersByMaHoaDon(maHoaDon));
+		mv.addObject("ordersDetails",usersOrdersDetailsDAO.getUsersOrdersDetails(maHoaDon));
+		return mv;		
 	}
 
 }

@@ -23,7 +23,7 @@
 									<ul class="account_selection">
 
 										<li id="changePassword"hidden><a href="${pageContext.request.contextPath}/user/${user.username}/editUsers"><i class="fa fa-sign-in" aria-hidden="true"></i>Thông tin tài khoản</a></li>
-										<li id="purchase"hidden><a href="${pageContext.request.contextPath}/user/${user.username}/purchase"><i class="fa fa-sign-in" aria-hidden="true"></i>Lịch sử mua hàng</a></li>
+										<li id="purchase"hidden><a href="${pageContext.request.contextPath}/user/${user.username}/order"><i class="fa fa-sign-in" aria-hidden="true"></i>Lịch sử mua hàng</a></li>
 
 										<li id="login" hidden><a  href="${pageContext.request.contextPath}/auth/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng nhập</a></li>
 										<li id="login" hidden><a  href="${pageContext.request.contextPath}/auth/register"><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng ký</a></li>

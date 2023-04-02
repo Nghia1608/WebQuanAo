@@ -22,14 +22,35 @@ public class UsersOrdersDetailsDTO {
 	public void setSoLuong(int soLuong) {
 		this.soLuong = soLuong;
 	}
-	public int getMaHoaDon() {
+	public String getMaHoaDon() {
 		return maHoaDon;
 	}
-	public void setMaHoaDon(int maHoaDon) {
+	public void setMaHoaDon(String maHoaDon) {
 		this.maHoaDon = maHoaDon;
 	}
 	private String usersordersdetailsID;
 	private String productDetailsID;
 	private int soLuong;
-	private int maHoaDon;
+	private String maHoaDon;
+	public String getTenSanPham() {
+		return tenSanPham;
+	}
+	public void setTenSanPham(String tenSanPham) {
+		this.tenSanPham = tenSanPham;
+	}
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
+	}
+	public int getGiaTienBanRa() {
+		return giaTienBanRa;
+	}
+	public void setGiaTienBanRa(int giaTienBanRa) {
+		this.giaTienBanRa = giaTienBanRa;
+	}
+	private String tenSanPham;
+	private String size;
+	private int giaTienBanRa;
 }

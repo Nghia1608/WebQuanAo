@@ -1,11 +1,19 @@
 package webquanao.Controller;
 
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.codehaus.jackson.JsonProcessingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -18,10 +26,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import webquanao.DAO.*;
-
+import webquanao.DAO.CartsDAO.RandomIDGenerator;
 import webquanao.DTO.*;
 
 @Controller
@@ -206,42 +215,80 @@ public class ProductController {
     @RequestMapping(value = "/{cartsID}/updateCart", method = RequestMethod.POST)
     public String UpdateProductToCart(@ModelAttribute("cart") CartsDTO carts,
             @PathVariable("cartsID") String cartsID,
+            @ModelAttribute("username") String username,
             @RequestParam Map<String, String> params
             ) {
-
         int newSoLuongForUpdate = Integer.parseInt(params.get("soLuongForUpdate"+cartsID));
         int newTongTienForUpdate = Integer.parseInt(params.get("tongTienForUpdate" + cartsID));
-        String newUsername = params.get("username");
-        carts.setUsername(newUsername);
         carts.setSoLuongForUpdate(newSoLuongForUpdate);
         carts.setTongTienForUpdate(newTongTienForUpdate);
-        
+        System.out.println(""+newSoLuongForUpdate+""+newTongTienForUpdate+""+cartsID);
 		cartsDAO.updateCartInCartPage(cartsID,newSoLuongForUpdate,newTongTienForUpdate);
         
-        return "redirect:/user/{newUsername}/cart";
+        return "redirect:/user/{username}/cart";
     }
+    //xoa gio hang
+    @RequestMapping(value = "/{cartsID}/deleteCart", method = RequestMethod.POST)
+    public String DeleteProductCart(@ModelAttribute("cart") CartsDTO carts,
+            @PathVariable("cartsID") String cartsID,@ModelAttribute("username") String username)
+    		 {
+    	cartsDAO.delete(cartsID);
+    	return "redirect:/user/{username}/cart";
 
+    }
     
     //Product to Order
     //Add product to order and order detail
-    @RequestMapping(value = "/{username}/addOrder", method = RequestMethod.POST)
+    @RequestMapping(value = "/addOrder", method = RequestMethod.POST)
     public String AddProductToCart(
     		@ModelAttribute("cart") CartsDTO carts,
     		@ModelAttribute("usersorders") UsersOrdersDTO usersorders,
     		@ModelAttribute("usersordersdetails") UsersOrdersDetailsDTO usersordersdetails,
     		//
     		@RequestParam String username,
+    		@RequestParam String diaChi,
+    		@RequestParam String note,
+    		@RequestParam String hinhThucMuaHang,
+    		@RequestParam String tinhTrang,
+    		@RequestParam int tongTienGioHang,
+    		@RequestParam String maHoaDon,
     		@RequestParam String productDetailsID,
+    		@RequestParam String checked,
     		@RequestParam String cartsID,
-    		@RequestParam int soLuong,
-    		@RequestParam int tongTien) {
-	    		
-    			usersOrdersDAO.create(usersorders);
-    			usersOrdersDetailsDAO.create(usersordersdetails);
-    			
-    			cartsDAO.delete(cartsID);
-	    		 
-	
-	            return "redirect:/user/{username}/order";
+    		@RequestParam String soLuong)  {
+    	//Get current date  time
+    	Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    	//Get 3 day later
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(timestamp);
+        cal.add(Calendar.DAY_OF_MONTH, 3);
+        Timestamp newTimestamp = new Timestamp(cal.getTimeInMillis());
+        //add data to usersorders table
+    	usersOrdersDAO.createOrder(username,diaChi,note,hinhThucMuaHang,tinhTrang,tongTienGioHang,maHoaDon,timestamp,newTimestamp);
+
+        String[] ArrayProductDetailsID = productDetailsID.split(",");
+        String[] ArrayChecked = checked.split(",");
+        String[] ArraySoLuong = soLuong.split(",");
+        String[] ArrayCartsID = cartsID.split(",");
+
+        for (int i = 0; i < ArrayProductDetailsID.length; i++) {
+        	if(ArrayChecked[i].equals("true")) {
+
+            	//add data to usersordersdetails table
+        		usersOrdersDetailsDAO.create(RandomIDGenerator.generateUniqueID(),ArrayProductDetailsID[i],Integer.parseInt(ArraySoLuong[i]),maHoaDon);
+        		//delete data in cart
+        		cartsDAO.delete(ArrayCartsID[i]);
+        		//thay doi so luong con lai product detail
+        		productsDetailsDAO.updateProductsDetailsWhenOrder(Integer.parseInt(ArraySoLuong[i]),ArrayProductDetailsID[i]);        		
+        	}
+
+        }
+        return "redirect:/user/{username}/order";
     }
+    public class RandomIDGenerator {
+  	   public static String generateUniqueID() {
+  	       UUID uuid = UUID.randomUUID();
+  	       return (uuid.toString()).replace("-", "");
+  	   }
+  	}
 }

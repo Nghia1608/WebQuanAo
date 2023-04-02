@@ -14,7 +14,7 @@
       <a href="${pageContext.request.contextPath}/product/${product.productID}/createDetail">Thêm chi tiết sản phẩm</a>
 
 
-
+    <form id="restore-product-form"name="restore-product-form" method="POST">
     <table class="table">
         <thead>
             <tr>
@@ -33,7 +33,6 @@
 							<c:if test="${not index.first}">
 							
 							</c:if>
-			<form id="delete-product-form" action="${pageContext.request.contextPath}/product/${item.productDetailsID}/deleteDetail" method="POST">
 			<input type="hidden" name="productDetailsID" value="${item.productDetailsID}">
             <tr>
             <th scope="row"></th>
@@ -51,12 +50,12 @@
             </td>
             <td>
                 <a href="${pageContext.request.contextPath}/product/${item.productDetailsID}/editDetail" class="btnUpdate btn-link">Sửa</a>
-	            <input type="submit"class="btnDelete btn-link" type="submit" value="Xóa">
+                <a id="btn-select"href="" class="btnDelete btn-link" data-id="${item.productDetailsID}" data-toggle="modal" data-target="#exampleModalDelete">Xóa</a>
 
             </td>
             </tr>
             <input type="text" class="form-control" value="${item.giaTienBanRa}" id="giaTienBanRaSP${item.giaTienBanRa}" name="giaTienBanRa${item.giaTienBanRa}" hidden>
-			</form>
+
             <script>
                 //size
                     var sizeHienThi${item.giaTienBanRa} = "size"+"${item.giaTienBanRa}"    
@@ -73,10 +72,46 @@
         </tbody>
 
     </table>
+	</form>
 </div>
-    
+<div class="modal fade" id="exampleModalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Xác nhận xóa </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc muốn xóa sản phẩm ?</p>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-delete" type="button" class="btnDelete1 btn-link">Xác nhận</button>
+        <button type="button" class="btnCancel btn-link" data-dismiss="modal">Hủy</button>
+      </div>
+    </div>
   </div>
-	</div>
+</div>
+</div>
+<!--Event xóa-->
+<script>
+    document.addEventListener('DOMContentLoaded',function(){
+        var idDelete;
+        var deleteForm = document.getElementById('restore-product-form');
+        var btnDelete = document.getElementById('btn-delete');
+        $('#exampleModalDelete').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) 
+        idDelete = button.data('id')
+        });
+        btnDelete.onclick = function(){
+            deleteForm.action = '${pageContext.request.contextPath}/product/'+idDelete + '/deleteDetail?_method=POST';
+            deleteForm.submit();
+        }
+    })
+
+
+</script>
 <script src="<c:url value='/template/js/jquery-3.2.1.min.js'/>"></script>
 <script src="<c:url value='/template/styles/bootstrap4/popper.js'/>"></script>
 <script src="<c:url value='/template/styles/bootstrap4/bootstrap.min.js'/>"></script>

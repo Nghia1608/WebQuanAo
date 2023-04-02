@@ -71,10 +71,7 @@ public class CartsDAO implements ICartsService{
     public void updateCartInCartPage(String cartsID,int soLuong,int tongTien) {
         String sql = "UPDATE carts SET soLuong = ?, tongTien=? WHERE cartsID=?";
         CartsDTO tempCart = getCartsByID(cartsID);
-        int newSoLuong = tempCart.getSoLuong();
-        int newTongTien = tempCart.getTongTien();
-        String tempCartsID = tempCart.getCartsID();
-        jdbcTemplate.update(sql,newSoLuong,newTongTien,tempCartsID);
+        jdbcTemplate.update(sql,soLuong,tongTien,tempCart.getCartsID());
       }
 
     //Delete
@@ -82,6 +79,11 @@ public class CartsDAO implements ICartsService{
     public void delete(String cartsID) {
         String sql = "DELETE FROM carts WHERE cartsID = ?";
         jdbcTemplate.update(sql, cartsID);
+      }	
+    @Override
+    public void deleteFromOrder(String username,String productDetailsID) {
+        String sql = "DELETE FROM carts WHERE cartsID = ?";
+        jdbcTemplate.update(sql, username,productDetailsID);
       }	
     public class RandomIDGenerator {
  	   public static String generateUniqueID() {

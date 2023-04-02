@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import webquanao.BLL.ProductsDetailsBLL;
+import webquanao.DTO.CartsDTO;
 import webquanao.DTO.ProductsDTO;
 import webquanao.DTO.ProductsDetailsDTO;
 import webquanao.Service.IProductDetailService;
@@ -49,4 +50,18 @@ public class ProductsDetailsDAO implements IProductDetailService{
         String sql = "DELETE FROM productdetails WHERE productDetailsID = ?";
         jdbcTemplate.update(sql, productDetailID);
       }	
+    @Override
+    public void updateProductsDetailsWhenOrder(int soLuong,String productDetailsID) {
+        String sql = "UPDATE productdetails SET soLuongCon = ?,tinhTrang = ? WHERE productDetailsID=?";
+        ProductsDetailsDTO temp = findProductDetailByID(productDetailsID);
+        int newSoLuong = temp.getSoLuongCon()-soLuong;
+        String newTinhTrang = "";
+        if(newSoLuong==0) {
+        	newTinhTrang = "Tạm hết hàng";
+        }
+        else {
+        	newTinhTrang = "Còn hàng";
+        }
+        jdbcTemplate.update(sql,newSoLuong,newTinhTrang,productDetailsID);
+      }
 }

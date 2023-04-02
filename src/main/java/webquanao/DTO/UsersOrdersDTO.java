@@ -1,9 +1,16 @@
 package webquanao.DTO;
 
+
+
+import java.sql.Timestamp;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class UsersOrdersDTO {
 	public UsersOrdersDTO() {
 		super();
 	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -40,31 +47,32 @@ public class UsersOrdersDTO {
 	public void setTongTien(int tongTien) {
 		this.tongTien = tongTien;
 	}
-	public int getMaHoaDon() {
+	public String getMaHoaDon() {
 		return maHoaDon;
 	}
-	public void setMaHoaDon(int maHoaDon) {
+	public void setMaHoaDon(String maHoaDon) {
 		this.maHoaDon = maHoaDon;
 	}
-	public String getThoiGianDatHang() {
+	public Timestamp getThoiGianDatHang() {
 		return thoiGianDatHang;
 	}
-	public void setThoiGianDatHang(String thoiGianDatHang) {
+	public void setThoiGianDatHang(Timestamp thoiGianDatHang) {
 		this.thoiGianDatHang = thoiGianDatHang;
 	}
-	public String getThoiGianGiaoHangDuKien() {
-		return thoiGianGiaoHangDuKien;
+	public Timestamp getThoiGianGiaoDuKien() {
+		return thoiGianGiaoDuKien;
 	}
-	public void setThoiGianGiaoHangDuKien(String thoiGianGiaoHangDuKien) {
-		this.thoiGianGiaoHangDuKien = thoiGianGiaoHangDuKien;
+	public void setThoiGianGiaoDuKien(Timestamp thoiGianGiaoDuKien) {
+		this.thoiGianGiaoDuKien = thoiGianGiaoDuKien;
 	}
+	
 	private String username;
 	private String diaChi;
 	private String note;
 	private String hinhThucMuaHang;
 	private String tinhTrang;
 	private int tongTien;
-	private int maHoaDon;
-	private String thoiGianDatHang;
-	private String thoiGianGiaoHangDuKien;
+	private String maHoaDon;
+	private Timestamp thoiGianDatHang;
+	private Timestamp thoiGianGiaoDuKien;
 }

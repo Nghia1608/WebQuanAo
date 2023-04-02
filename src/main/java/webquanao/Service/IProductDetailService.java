@@ -10,4 +10,5 @@ public interface IProductDetailService {
 	void create(ProductsDetailsDTO productDetail);
 	void update(ProductsDetailsDTO productDetail);
 	void delete(String productDetailID);
+	void updateProductsDetailsWhenOrder(int soLuong,String productDetailsID);
 }
